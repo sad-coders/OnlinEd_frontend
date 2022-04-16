@@ -9,7 +9,7 @@ const initialState = {
     assignment:{},
     loading: true,
     name: '',
-    email: '',
+    email: 'kd13@iitbbs.ac.in',
     isLoggedIn: true
 }
 
@@ -24,15 +24,16 @@ export const GlobalProvider = ({ children }) => {
     async function getClassrooms() {
         if (state.isLoggedIn) {
             const email = state.email;
+            console.log("get classrooms",email)
             try {
               // dummy api
-                const res = await axios.get(`/api/v1/classrooms/${email}`, {
+                const res = await axios.get(`/api/v1/classroom?email=${email}`, {
                     headers: { 'Content-Type': 'application/json' }
                 });
-
+                console.log("get classrooms",res.data);
                 dispatch({
                     type: 'GET_CLASSROOMS',
-                    payload: res.data.data
+                    payload: res.data
                 });
             } catch (err) {
                 dispatch({

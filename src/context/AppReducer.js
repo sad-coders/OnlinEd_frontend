@@ -23,6 +23,18 @@ export default (state , action) => {
         loading : true,
         assignment : {}
       }  
+    case 'CLASSROOMS_RQST' : 
+      return {
+        ...state,
+        loading : true,
+        classrooms : []
+      }  
+    case 'CLASSROOMS_RQST_SUCCESS' : 
+    return {
+      ...state,
+      loading : false,
+      classrooms : action.payload
+    }  
     default : 
         return state
   }
