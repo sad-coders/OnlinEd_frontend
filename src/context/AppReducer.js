@@ -1,12 +1,6 @@
 export default (state , action) => {
   switch(action.type) {
-    case 'GET_CLASSROOMS':
-      return {
-          ...state,
-          loading :false,
-          classrooms : action.payload
-      }
-    case 'GET_REQUEST_ERROR':
+    case 'GET_RQST_ERROR':
       return {
         ...state,
         error: action.payload
@@ -35,6 +29,18 @@ export default (state , action) => {
       loading : false,
       classrooms : action.payload
     }  
+    case 'ASSIGNMENTS_RQST' :
+      return  {
+      ...state,
+      laoding : true,
+      classroom : []
+    }
+    case 'ASSIGNMENTS_RQST_SUCCESS' : 
+     return {
+       ...state,
+       loading : false,
+       classroom : action.payload
+     }
     default : 
         return state
   }

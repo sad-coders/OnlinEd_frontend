@@ -2,7 +2,7 @@ import { useContext, useEffect } from "react"
 import { GlobalContext } from "../../context/GlobalState"
 import ClassroomCard from './ClassroomCard'
 function Classrooms(){
-    const {classrooms,loading,getClassrooms} = useContext(GlobalContext)
+    const {classrooms,loading,getClassrooms} = useContext(GlobalContext)    
     useEffect(()=>{
         getClassrooms()
     },[])

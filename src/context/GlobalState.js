@@ -5,6 +5,7 @@ import axios from 'axios'
 
 const initialState = {
     classrooms: [],
+    classroom : {},
     error: null,
     assignment:{},
     loading: true,
@@ -27,17 +28,20 @@ export const GlobalProvider = ({ children }) => {
             console.log("get classrooms",email)
             try {
               // dummy api
+                dispatch({
+                    type : 'CLASSROOMS_RQST'
+                })
                 const res = await axios.get(`/api/v1/classroom?email=${email}`, {
                     headers: { 'Content-Type': 'application/json' }
                 });
                 console.log("get classrooms",res.data);
                 dispatch({
-                    type: 'GET_CLASSROOMS',
+                    type: 'CLASSROOMS_RQST_SUCCESS',
                     payload: res.data
                 });
             } catch (err) {
                 dispatch({
-                    type: 'GET_REQUEST_ERROR',
+                    type: 'GET_RQST_ERROR',
                     payload: err.response.data.error
                 });
             }
@@ -60,13 +64,33 @@ export const GlobalProvider = ({ children }) => {
             }catch(error){
                 console.log('get assignment',error)
                 dispatch({
-                    type : 'ASSIGNMENT_RQST_ERROR',
+                    type : 'GET_RQST_ERROR',
                     payload : error
                 })
             }
         }
     }
- 
+    async function getAssignmentsOfClassroom(){
+        const classroom_id = '625aff95d6e1aa155ca582c1';
+        if(state.isLoggedIn){
+            dispatch({
+                type : 'ASSIGNMENTS_RQST'
+            })
+            try{
+                const response = await axios.get(`/api/v1/classroom/${classroom_id}`)
+                console.log('get assignments',response.data)
+                dispatch({
+                    type : 'ASSIGNMENTS_RQST_SUCCESS',
+                    payload : response.data
+                })
+            }catch(error){
+                console.log("get assignments",error)
+                dispatch({
+                    type : 'GET_RQST_ERROR'
+                })
+            }
+        }
+    }
     function userLogout() {
         dispatch({
             type: 'USER_LOGOUT'
@@ -96,6 +120,7 @@ export const GlobalProvider = ({ children }) => {
     
     return (<GlobalContext.Provider value={{
         classrooms: state.classrooms,
+        classroom: state.classroom,
         error: state.error,
         loading: state.loading,
         name: state.name,
@@ -105,7 +130,8 @@ export const GlobalProvider = ({ children }) => {
         getClassrooms,
         userLogin,
         getAssignment,
-        userLogout
+        userLogout,
+        getAssignmentsOfClassroom
     }}>
         {children}
     </GlobalContext.Provider>)
