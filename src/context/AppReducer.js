@@ -11,6 +11,18 @@ export default (state , action) => {
         ...state,
         error: action.payload
       }
+    case 'ASSIGNMENT_RQST_SUCCESS' : 
+      return {
+        ...state,
+        loading : false,
+        assignment : action.payload
+      }
+    case 'ASSIGNMENT_RQST' : 
+      return {
+        ...state,
+        loading : true,
+        assignment : {}
+      }  
     default : 
         return state
   }

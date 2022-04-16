@@ -6,10 +6,11 @@ import axios from 'axios'
 const initialState = {
     classrooms: [],
     error: null,
+    assignment:{},
     loading: true,
     name: '',
     email: '',
-    isLoggedIn: false
+    isLoggedIn: true
 }
 
 //Create Context
@@ -25,7 +26,7 @@ export const GlobalProvider = ({ children }) => {
             const email = state.email;
             try {
               // dummy api
-                const res = await axios.get(`api/v1/classrooms/${email}`, {
+                const res = await axios.get(`/api/v1/classrooms/${email}`, {
                     headers: { 'Content-Type': 'application/json' }
                 });
 
@@ -42,7 +43,28 @@ export const GlobalProvider = ({ children }) => {
         }
     }
     
-     
+    async function getAssignment(){
+        const assignment_id = "625a9b289a6aa315c02e8791";
+        if(state.isLoggedIn){
+            dispatch({
+                type : 'ASSIGNMENT_RQST',
+            })
+            try{
+                const response = await axios.get(`/api/v1/assignment/${assignment_id}`)
+                console.log('get assignment',response.data);
+                dispatch({
+                    type : 'ASSIGNMENT_RQST_SUCCESS',
+                    payload : response.data
+                })
+            }catch(error){
+                console.log('get assignment',error)
+                dispatch({
+                    type : 'ASSIGNMENT_RQST_ERROR',
+                    payload : error
+                })
+            }
+        }
+    }
  
     function userLogout() {
         dispatch({
@@ -70,16 +92,18 @@ export const GlobalProvider = ({ children }) => {
         }
     }
 
-
+    
     return (<GlobalContext.Provider value={{
         classrooms: state.classrooms,
         error: state.error,
         loading: state.loading,
         name: state.name,
+        assignment : state.assignment,
         email: state.email,
         isLoggedIn: state.isLoggedIn,
         getClassrooms,
         userLogin,
+        getAssignment,
         userLogout
     }}>
         {children}
