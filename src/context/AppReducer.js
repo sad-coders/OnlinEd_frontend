@@ -1,4 +1,4 @@
-export default (state , action) => {
+const reducer =  (state , action) => {
   switch(action.type) {
     case 'GET_CLASSROOMS':
       return {
@@ -23,7 +23,20 @@ export default (state , action) => {
         loading : true,
         assignment : {}
       }  
+      case 'VERIFY_USER': 
+        return {
+          ...state,
+          verificationStatus: action.payload
+        }
+      case 'VERIFICATION_ERROR': 
+        return {
+          ...state,
+          verificationStatus: 'failed',
+          verificationError: action.payload
+        }
     default : 
         return state
   }
 }
+
+export default reducer;

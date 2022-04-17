@@ -8,6 +8,8 @@ import Home from './components/Home';
 import {GlobalProvider} from './context/GlobalState';
 import Classmates from './components/student/Classmates';
 import Assignment from './components/student/Assignment';
+import Verify from './components/verify/Verify';
+
 
 function App() {
   return (
@@ -17,6 +19,7 @@ function App() {
           <Route path="/student" element={<Assignment/>} />
           <Route path="/faculty" element={<Home />} />
           <Route path="/upload" element={<Home />} />
+          <Route path="/verify/:userId" element={<Verify />} />
           <Route path="/" element={<Home />} />
         </Routes>
       </BrowserRouter>

@@ -10,7 +10,9 @@ const initialState = {
     loading: true,
     name: '',
     email: '',
-    isLoggedIn: true
+    isLoggedIn: true,
+    verificationStatus: 'pending',
+    verificationError: null,
 }
 
 //Create Context
@@ -71,6 +73,7 @@ export const GlobalProvider = ({ children }) => {
             type: 'USER_LOGOUT'
         })
     }
+    
     async function userLogin(data) {
         dispatch({
             type: 'USER_LOGIN',
@@ -78,20 +81,37 @@ export const GlobalProvider = ({ children }) => {
         })
         const email = data.email;
         try {
-            const res = await axios.get(`api/v1/transactions/${email}`);
+            const res = await axios.get(`api/v1/classrooms/${email}`);
 
             dispatch({
-                type: 'GET_TRANSACTIONS',
+                type: 'GET_CLASSROOMS',
                 payload: res.data.data
             });
         } catch (err) {
             dispatch({
-                type: 'TRANSACTION_ERROR',
+                type: 'ERROR',
                 payload: err.response.data.error
             });
         }
     }
 
+    async function verifyUser(userId) {
+        console.log(' UserId sent for verification is ' + userId)
+        try {
+            const res = await axios.post('http://localhost:5000/api/v1/auth/verify/' + userId);
+
+            dispatch({
+                type: 'VERIFY_USER',
+                payload: res.data.verificationStatus
+            });
+        } catch (err) {
+            dispatch({
+                type: 'VERIFICATION_ERROR',
+                payload: err.response.data.error
+            });
+        }
+        
+    }
     
     return (<GlobalContext.Provider value={{
         classrooms: state.classrooms,
@@ -101,10 +121,12 @@ export const GlobalProvider = ({ children }) => {
         assignment : state.assignment,
         email: state.email,
         isLoggedIn: state.isLoggedIn,
+        verificationStatus: state.verificationStatus,
         getClassrooms,
         userLogin,
         getAssignment,
-        userLogout
+        userLogout,
+        verifyUser
     }}>
         {children}
     </GlobalContext.Provider>)
