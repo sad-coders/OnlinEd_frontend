@@ -1,10 +1,7 @@
-import { Typography } from "@mui/material"
-
+import {assignmentStreamHeaderStyle} from './styles'
 function AssignmentStreamHeader({className}){
     return (
-        <Typography variant="h4">
-            {className}
-        </Typography>
+        <img style={assignmentStreamHeaderStyle} src={`${process.env.PUBLIC_URL}/assets/images/img_code.jpg`}/>
     )
 }
 export default AssignmentStreamHeader

@@ -10,12 +10,10 @@ const initialState = {
     assignment:{},
     loading: true,
     name: '',
-    email: '',
     isLoggedIn: true,
     verificationStatus: 'pending',
     verificationError: null,
     email: 'kd13@iitbbs.ac.in',
-    isLoggedIn: true
 }
 
 //Create Context
@@ -41,7 +39,7 @@ export const GlobalProvider = ({ children }) => {
                 console.log("get classrooms",res.data);
                 dispatch({
                     type: 'CLASSROOMS_RQST_SUCCESS',
-                    payload: res.data
+                    payload: res.data.classrooms
                 });
             } catch (err) {
                 dispatch({

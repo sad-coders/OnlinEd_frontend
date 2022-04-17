@@ -1,30 +1,32 @@
-import Card from '@mui/material/Card';
-import Box from '@mui/material/Box';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-
-const bull = (
-  <Box
-    component="span"
-    sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}
-  >
-    •
-  </Box>
-);
-
-export default function ClassroomCard({classroom}){
-  return (
-    <Card sx={{ width: 275, margin : 10 }}>
-      <CardContent>
-        <Typography variant = "h5">
-          {classroom.className}
-        </Typography>
-        <Typography variant ="h6">
-          {classroom.authorName}
-        </Typography>
-      </CardContent>
+import { CardMedia,CardContent,Typography,Card,CardActionArea } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core";
+import { dayCardStyle,dayCardImgStyle } from "./styles";
+const useStyles = makeStyles({
+    root: {
+      maxWidth: 345,
+    },
+});
+const ClassroomCard = ({classroom})=>{
+    const classes = useStyles();
+    
+    return (
+      <Card className={classes.root} variant="outlined" style={dayCardStyle}>
+      <CardActionArea>
+      <CardMedia
+      style={dayCardImgStyle}
+      >
+        <img src={`${process.env.PUBLIC_URL}/assets/images/img_code.jpg`} alt="weather" />
+      </CardMedia>
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="h2">
+            {classroom.className}
+          </Typography>
+          <Typography variant="body2" color="textSecondary" component="p">
+            {classroom.authorName}
+          </Typography>
+        </CardContent>
+      </CardActionArea>
     </Card>
-  );
-}
+    );
+};
+export default ClassroomCard;

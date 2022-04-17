@@ -1,19 +1,26 @@
 import { useContext, useEffect } from "react"
 import { GlobalContext } from "../../context/GlobalState"
+import { Grid } from "@material-ui/core"
 import ClassroomCard from './ClassroomCard'
-function Classrooms(){
-    const {classrooms,loading,getClassrooms} = useContext(GlobalContext)    
-    useEffect(()=>{
+function Classrooms() {
+    const { classrooms, loading, getClassrooms } = useContext(GlobalContext)
+    useEffect(() => {
         getClassrooms()
-    },[])
+    }, [])
     return (
-        loading? "loading" : (
+        loading ? "loading" : (
             <>
-                {
-                    classrooms.map((classroom,i)=>
-                        <ClassroomCard key = {i} classroom = {classroom}/>
-                    )
-                }
+                <Grid container spacing={2}>
+
+                    {
+                        classrooms.map((classroom, i) =>
+                            <Grid item>
+                                <ClassroomCard key={i} classroom={classroom} />
+                            </Grid>
+                        )
+                    }
+
+                </Grid>
             </>
         )
     )
