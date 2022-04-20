@@ -18,7 +18,7 @@ function App() {
     <GlobalProvider>
       <BrowserRouter>
         <Routes>
-          <Route path="/student" element={<Assignment />} />
+          <Route path="/student" element={<Classrooms />} />
           <Route path="/faculty" element={<Home />} />
           <Route path="/upload" element={<UploadFile />} />
           <Route path="/verify/:userId" element={<Verify />} />

@@ -1,12 +1,11 @@
 import { Typography } from "@mui/material";
+import UploadFile from "../../UploadFile/UploadFile";
 
 function AssignmentSubmission(){
     return (
         <>
-            <Typography>
-                Your Work
-            </Typography>
-            {/** TODO: submission button */}
+            
+            <UploadFile/>
         </>
     )
 }

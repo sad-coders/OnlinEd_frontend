@@ -3,7 +3,10 @@ import { Link } from "react-router-dom"
 
 function AssignmentContent({ question, questionLink }) {
     return (<>
-        <Typography>
+        <Typography 
+        variant="p"
+        component={"span"}
+        >
             {question}
         </Typography>
         <Link to={questionLink}>{questionLink}</Link>

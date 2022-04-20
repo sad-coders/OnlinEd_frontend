@@ -1,9 +1,12 @@
+import { Divider } from "@material-ui/core";
 import { Grid, Typography } from "@mui/material";
 
 function AssignmentHeader({ assignmentTitle, authorName, postedOn, dueDate }) {
     return (
         <>
-            <Grid container >
+            <Grid container
+            display={"flex"}
+            >
                 <Grid item xs={12}
                     display="flex"
                     justifyContent={"space-between"}
@@ -35,6 +38,7 @@ function AssignmentHeader({ assignmentTitle, authorName, postedOn, dueDate }) {
                     </Typography>
                 </Grid>
             </Grid>
+            <hr/>
         </>
     )
 }

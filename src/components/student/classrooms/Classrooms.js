@@ -13,14 +13,14 @@ function Classrooms() {
                 <Grid
                     container
                     direction="row"
-                    alignItems="start"
+                    alignItems="flex-start"
                     justifyContent="center"
                     style={{marginTop : '2rem'}}
                     spacing={2}>
                     {
                         classrooms.map((classroom, i) =>
-                            <Grid item>
-                                <ClassroomCard key={i} classroom={classroom} />
+                            <Grid item key={i} >
+                                <ClassroomCard classroom={classroom} />
                             </Grid>
                         )
                     }
