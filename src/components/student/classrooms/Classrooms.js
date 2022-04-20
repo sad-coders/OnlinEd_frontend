@@ -1,5 +1,5 @@
 import { useContext, useEffect } from "react"
-import { GlobalContext } from "../../context/GlobalState"
+import { GlobalContext } from "../../../context/GlobalState"
 import { Grid } from "@material-ui/core"
 import ClassroomCard from './ClassroomCard'
 function Classrooms() {
@@ -10,12 +10,17 @@ function Classrooms() {
     return (
         loading ? "loading" : (
             <>
-                <Grid container spacing={2}>
-
+                <Grid
+                    container
+                    direction="row"
+                    alignItems="flex-start"
+                    justifyContent="center"
+                    style={{marginTop : '2rem'}}
+                    spacing={2}>
                     {
                         classrooms.map((classroom, i) =>
-                            <Grid item>
-                                <ClassroomCard key={i} classroom={classroom} />
+                            <Grid item key={i} >
+                                <ClassroomCard classroom={classroom} />
                             </Grid>
                         )
                     }
@@ -25,4 +30,5 @@ function Classrooms() {
         )
     )
 }
+
 export default Classrooms
