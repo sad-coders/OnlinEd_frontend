@@ -6,19 +6,19 @@ import Home from "./components/Home";
 import UploadFile from "./components/UploadFile/UploadFile.js";
 
 import { GlobalProvider } from "./context/GlobalState";
-import Assignment from "./components/student/Assignment";
+import Assignment from "./components/student/Assignment/Assignment";
 
 import Verify from "./components/verify/Verify";
 
-import Classrooms from "./components/student/Classrooms";
-import AssignmentStream from "./components/student/AssignmentStream";
+import Classrooms from "./components/student/classrooms/Classrooms";
+import AssignmentStream from "./components/student/AssignmentStream/AssignmentStream";
 
 function App() {
   return (
     <GlobalProvider>
       <BrowserRouter>
         <Routes>
-          <Route path="/student" element={<AssignmentStream />} />
+          <Route path="/student" element={<Assignment />} />
           <Route path="/faculty" element={<Home />} />
           <Route path="/upload" element={<UploadFile />} />
           <Route path="/verify/:userId" element={<Verify />} />
