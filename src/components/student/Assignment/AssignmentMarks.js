@@ -1,8 +1,7 @@
 import { useContext, useEffect, useState } from "react"
 import { GlobalContext } from "../../../context/GlobalState"
-import { useParams, Link } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
  
-import { Grid } from "@material-ui/core";
 
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -25,6 +24,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 const drawerWidth = 480;
 
 const AssignmentMarks = () => {
+    const navigate = useNavigate();
     const { assignmentId } = useParams();
     const { loading , solutionsOfAssignment, getSolutionsOfAssignment, assignMarks} = useContext(GlobalContext);
 // assignment, getAssignment  
@@ -64,7 +64,7 @@ const AssignmentMarks = () => {
                     sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}
                 >
                     <Toolbar>
-                        <Typography variant="p" noWrap component={Link} to={"/classrooms"}
+                        <Typography variant="p" noWrap component="div" onClick={() => navigate(-1)}
                             style={{ textDecoration: "none", color: "inherit" }} >
                             <ArrowBackIcon style={{ marginTop:"10px" }} /> 
                         </Typography>

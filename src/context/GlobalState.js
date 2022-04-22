@@ -413,6 +413,7 @@ export const GlobalProvider = ({ children }) => {
         assignment: state.assignment,
         email: state.email,
         isLoggedIn: state.isLoggedIn,
+        isFaculty: state.isFaculty,
         verificationStatus: state.verificationStatus,
         allAnswerOfQuestion: state.allAnswerOfQuestion,
         allQuestionOfClassRoom: state.allQuestionOfClassRoom,

@@ -14,7 +14,7 @@ export default function Assignments({ assignments }) {
                     return (
                         <Link  
                         key={idx} 
-                        to={`/assignment/${assignment.assignmentId}`}
+                        to={isFaculty ? `/assignmentmarks/${assignment.assignmentId}`: `/assignment/${assignment.assignmentId}`}
                         style={{ textDecoration: "none", color: "inherit" }}
                         >
                             <ListItemButton divider>
