@@ -1,11 +1,12 @@
 import { useContext, useEffect, useRef } from "react"
+import { Link } from "react-router-dom"
 import { GlobalContext } from "../../../context/GlobalState"
 import { Grid } from "@material-ui/core"
 import ClassroomCard from './ClassroomCard'
 import ClassroomCreation from "./ClassroomCreation"
 import ClassJoinCard from './ClassJoinCard'
 function Classrooms() {
-    const { classrooms, loading, getClassrooms } = useContext(GlobalContext)
+    const { classrooms, loading, getClassrooms, isFaculty } = useContext(GlobalContext)
     useEffect(() => {
         getClassrooms()
     }, [])
@@ -22,16 +23,21 @@ function Classrooms() {
                     {
                         classrooms.map((classroom, i) =>
                             <Grid item key={i + 1} >
+                                <Link  to={`/classroom`}>
                                 <ClassroomCard classroom={classroom} />
+                                </Link>
                             </Grid>
                         )
                     }
-                    <Grid item key={0} >
-                        <ClassroomCreation />
-                    </Grid>
-                    <Grid>
-                        <ClassJoinCard />
-                    </Grid>
+                    {
+                        isFaculty ? (
+                            <Grid item key={0} >
+                                <ClassroomCreation />
+                            </Grid>) : (
+                            <Grid>
+                                <ClassJoinCard />
+                            </Grid>)
+                    }
                 </Grid>
             </>
         )

@@ -63,7 +63,9 @@ const reducer =  (state , action) => {
         isLoggedIn: action.payload.auth,
         token: action.payload.token,
         person: action.payload.person,
-        email: action.payload.person.email
+        email: action.payload.person.email,
+        name : action.payload.person.name,
+        isFaculty : !action.payload.person.isStudent
       }
     case 'LOGIN_ERROR' : 
       return {

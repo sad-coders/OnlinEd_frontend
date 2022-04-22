@@ -1,5 +1,5 @@
 import { useContext, useEffect } from "react"
-import { GlobalContext } from "../../context/GlobalState"
+import { GlobalContext } from "../../../context/GlobalState"
 // import AssignmentContent from "./AssignmentContent"
 // import AssignmentHeader from "./AssignmentHeader"
 import { Container, Divider } from "@material-ui/core"
