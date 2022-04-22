@@ -54,8 +54,8 @@ export const GlobalProvider = ({ children }) => {
     }
     
     async function getAssignment(){
-        const assignment_id = "625a9b289a6aa315c02e8791";
-        if(state.isLoggedIn){
+        const assignment_id = "626136a285ed27c9426ef3b7";
+        // if(state.isLoggedIn){
             dispatch({
                 type : 'ASSIGNMENT_RQST',
             })
@@ -73,12 +73,12 @@ export const GlobalProvider = ({ children }) => {
                     payload : error
                 })
             }
-        }
+        // }
     }
 
     async function getAssignmentsOfClassroom(){
-        const classroom_id = '625aff95d6e1aa155ca582c1';
-        if(state.isLoggedIn){
+        const classroom_id = '62612846f02b0d51c0e019e7';
+        // if(state.isLoggedIn){
             dispatch({
                 type : 'ASSIGNMENTS_RQST'
             })
@@ -95,7 +95,7 @@ export const GlobalProvider = ({ children }) => {
                     type : 'GET_RQST_ERROR'
                 })
             }
-        }
+        // }
     }
     async function createClassroom(className){
         console.log("class creation in progress")

@@ -14,7 +14,7 @@ export default function Assignments({ assignments }) {
                                 <AssignmentIcon />
                             </ListItemIcon>
                             <ListItem>
-                                <ListItemText primary={assignment.title} secondary={assignment.postedOn} />
+                                <ListItemText primary={assignment.assignmentTitle} secondary={assignment.postedOn} />
                             </ListItem>
                         </ListItemButton>
                     )
