@@ -10,11 +10,13 @@ const initialState = {
     assignment:{},
     loading: true,
     name: '',
-    isFaculty : false,
-    isLoggedIn: true,
+    isLoggedIn: false,
+    isFaculty : false, 
     verificationStatus: 'pending',
     verificationError: null,
     email: 'tss11@iitbbs.ac.in',
+    signupSuccess: false,
+    person : {}
 }
 
 //Create Context
@@ -34,7 +36,7 @@ export const GlobalProvider = ({ children }) => {
                 dispatch({
                     type : 'CLASSROOMS_RQST'
                 })
-                const res = await axios.get(`/api/v1/classroom?email=${email}`, {
+                const res = await axios.get(`http://localhost:5000/api/v1/classroom?email=${email}`, {
                     headers: { 'Content-Type': 'application/json' }
                 });
                 console.log("get classrooms",res.data);
@@ -58,7 +60,7 @@ export const GlobalProvider = ({ children }) => {
                 type : 'ASSIGNMENT_RQST',
             })
             try{
-                const response = await axios.get(`/api/v1/assignment/${assignment_id}`)
+                const response = await axios.get(`http://localhost:5000/api/v1/assignment/${assignment_id}`)
                 console.log('get assignment',response.data);
                 dispatch({
                     type : 'ASSIGNMENT_RQST_SUCCESS',
@@ -81,7 +83,7 @@ export const GlobalProvider = ({ children }) => {
                 type : 'ASSIGNMENTS_RQST'
             })
             try{
-                const response = await axios.get(`/api/v1/classroom/${classroom_id}`)
+                const response = await axios.get(`http://localhost:5000/api/v1/classroom/${classroom_id}`)
                 console.log('get assignments',response.data)
                 dispatch({
                     type : 'ASSIGNMENTS_RQST_SUCCESS',
@@ -178,6 +180,74 @@ export const GlobalProvider = ({ children }) => {
         }
         
     }
+
+
+    async function login(email, password) {
+        console.log(' Login req sent for  ' + email + ' with pass ' + password)
+        try {
+            const res = await axios.post('http://localhost:5000/api/v1/auth/login/', {
+                email,
+                password
+            });
+
+            dispatch({
+                type: 'LOGIN_USER',
+                payload: res.data
+            });
+        } catch (err) {
+            dispatch({
+                type: 'AUTH_ERROR',
+                payload: err.response
+            });
+        }
+    }
+
+    async function signUp(person) {
+        var {email, password, isFaculty, name} = person;
+        console.log(' SignUp req recvd');
+        try {
+            const res = await axios.post('http://localhost:5000/api/v1/auth/signup/', {
+                email,
+                password,
+                isFaculty,
+                name,
+                profile_pic : ''
+            });
+            console.log(res)
+            dispatch({
+                type: 'SIGNUP_USER',
+                payload: res.data
+            });
+        } catch (err) {
+            dispatch({
+                type: 'AUTH_ERROR',
+                payload: err.response
+            });
+        }   
+    }
+
+    async function joinClassroom(classcode){
+        // var {email, password, isFaculty, name} = person;
+        console.log(' Join class req recvd');
+        try {
+            // console.log(`http://localhost:5000/api/v1/account/${state.person._id}`)
+            const res = await axios.put(`http://localhost:5000/api/v1/account/${state.person._id}`, {
+                email: state.person.email,
+                name: state.person.name,
+                classcode: Number(classcode),
+            });
+            console.log(res);
+            dispatch({
+                type: 'JOIN_CLASSROOM',
+                payload: res.data.person
+            });
+        } catch (err) {
+            dispatch({
+                type: 'JOIN_CLASSROOM_ERROR',
+                payload: err.response
+            });
+        }
+    }
     
     return (<GlobalContext.Provider value={{
         classrooms: state.classrooms,
@@ -189,13 +259,18 @@ export const GlobalProvider = ({ children }) => {
         email: state.email,
         isLoggedIn: state.isLoggedIn,
         verificationStatus: state.verificationStatus,
+        person: state.person,
+        signupSuccess: state.signupSuccess,
         getClassrooms,
         userLogin,
         getAssignment,
         userLogout,
         verifyUser,
+        login,
+        signUp,
         createClassroom,
-        getAssignmentsOfClassroom
+        getAssignmentsOfClassroom,
+        joinClassroom
     }}>
         {children}
     </GlobalContext.Provider>)

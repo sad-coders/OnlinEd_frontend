@@ -57,7 +57,36 @@ const reducer =  (state , action) => {
        loading : false,
        classroom : action.payload
      }
-     case 'CLASSROOM_POST_RQST' : 
+    case 'LOGIN_USER' :
+      return {
+        ...state,
+        isLoggedIn: action.payload.auth,
+        token: action.payload.token,
+        person: action.payload.person,
+        email: action.payload.person.email
+      }
+    case 'LOGIN_ERROR' : 
+      return {
+        ...state,
+        loginError: action.payload
+      }
+    case 'SIGNUP_USER' : 
+      return {
+        ...state,
+        signupSuccess: action.payload.auth
+      }
+    case 'JOIN_CLASSROOM' : 
+      return {
+        ...state,
+        person: action.payload,
+        classrooms: action.payload.classrooms
+      }
+    case 'JOIN_CLASSROOM_ERROR': 
+      return {
+        ...state,
+        classroomError: action.payload
+      }
+    case 'CLASSROOM_POST_RQST' : 
      return {
        ...state,
        loading : true,
@@ -67,6 +96,7 @@ const reducer =  (state , action) => {
        loading : true,
      }
      */
+
     default : 
         return state
   }

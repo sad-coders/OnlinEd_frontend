@@ -1,8 +1,9 @@
-import { useContext, useEffect } from "react"
+import { useContext, useEffect, useRef } from "react"
 import { GlobalContext } from "../../../context/GlobalState"
 import { Grid } from "@material-ui/core"
 import ClassroomCard from './ClassroomCard'
 import ClassroomCreation from "./ClassroomCreation"
+import ClassJoinCard from './ClassJoinCard'
 function Classrooms() {
     const { classrooms, loading, getClassrooms } = useContext(GlobalContext)
     useEffect(() => {
@@ -20,13 +21,16 @@ function Classrooms() {
                     spacing={2}>
                     {
                         classrooms.map((classroom, i) =>
-                            <Grid item key={i+1} >
+                            <Grid item key={i + 1} >
                                 <ClassroomCard classroom={classroom} />
                             </Grid>
                         )
                     }
                     <Grid item key={0} >
-                         <ClassroomCreation/>
+                        <ClassroomCreation />
+                    </Grid>
+                    <Grid>
+                        <ClassJoinCard />
                     </Grid>
                 </Grid>
             </>
