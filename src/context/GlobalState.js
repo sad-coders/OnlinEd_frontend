@@ -239,140 +239,140 @@ export const GlobalProvider = ({ children }) => {
       console.log("Get AllAnswers", error);
       dispatch({ type: "GET_RQST_ERROR" });
     }
+  }
 
-    async function login(email, password) {
-      console.log(" Login req sent for  " + email + " with pass " + password);
-      try {
-        const res = await axios.post(
-          "http://localhost:5000/api/v1/auth/login/",
-          {
-            email,
-            password,
-          }
-        );
+  async function login(email, password) {
+    console.log(" Login req sent for  " + email + " with pass " + password);
+    try {
+      const res = await axios.post(
+        "http://localhost:5000/api/v1/auth/login/",
+        {
+          email,
+          password,
+        }
+      );
 
-        dispatch({
-          type: "LOGIN_USER",
-          payload: res.data,
-        });
-      } catch (err) {
-        dispatch({
-          type: "AUTH_ERROR",
-          payload: err.response,
-        });
-      }
-    }
-
-    async function signUp(person) {
-      var { email, password, isFaculty, name } = person;
-      console.log(" SignUp req recvd");
-      try {
-        const res = await axios.post(
-          "http://localhost:5000/api/v1/auth/signup/",
-          {
-            email,
-            password,
-            isFaculty,
-            name,
-            profile_pic: "",
-          }
-        );
-        console.log(res);
-        dispatch({
-          type: "SIGNUP_USER",
-          payload: res.data,
-        });
-      } catch (err) {
-        dispatch({
-          type: "AUTH_ERROR",
-          payload: err.response,
-        });
-      }
-    }
-
-    async function joinClassroom(classcode) {
-      // var {email, password, isFaculty, name} = person;
-      console.log(" Join class req recvd");
-      try {
-        // console.log(`http://localhost:5000/api/v1/account/${state.person._id}`)
-        const res = await axios.put(
-          `http://localhost:5000/api/v1/account/${state.person._id}`,
-          {
-            email: state.person.email,
-            name: state.person.name,
-            classcode: Number(classcode),
-          }
-        );
-        console.log(res);
-        dispatch({
-          type: "JOIN_CLASSROOM",
-          payload: res.data.person,
-        });
-      } catch (err) {
-        dispatch({
-          type: "JOIN_CLASSROOM_ERROR",
-          payload: err.response,
-        });
-      }
-    }
-
-    const addQuestion = async (classRoomId, question) => {
       dispatch({
-        type: "Add_Question_RQST",
+        type: "LOGIN_USER",
+        payload: res.data,
       });
-      try {
-        const host = `http://localhost:5000`;
-        const URL = host + `/api/v1/discussion/classroom/${classRoomId}`;
-        question.authorId = state.userId;
-        console.log(question);
-        console.log(URL);
+    } catch (err) {
+      dispatch({
+        type: "AUTH_ERROR",
+        payload: err.response,
+      });
+    }
+  }
 
-        const response = await axios.post(URL, question);
+  async function signUp(person) {
+    var { email, password, isFaculty, name } = person;
+    console.log(" SignUp req recvd");
+    try {
+      const res = await axios.post(
+        "http://localhost:5000/api/v1/auth/signup/",
+        {
+          email,
+          password,
+          isFaculty,
+          name,
+          profile_pic: "",
+        }
+      );
+      console.log(res);
+      dispatch({
+        type: "SIGNUP_USER",
+        payload: res.data,
+      });
+    } catch (err) {
+      dispatch({
+        type: "AUTH_ERROR",
+        payload: err.response,
+      });
+    }
+  }
 
-        console.log(response);
-        dispatch({
-          type: "AddingNewQuestion_RQST_SUCCESS",
-        });
-      } catch (error) {
-        console.log("Adding new Question failed", error);
-        dispatch({ type: "GET_RQST_ERROR" });
-      }
-    };
+  async function joinClassroom(classcode) {
+    // var {email, password, isFaculty, name} = person;
+    console.log(" Join class req recvd");
+    try {
+      // console.log(`http://localhost:5000/api/v1/account/${state.person._id}`)
+      const res = await axios.put(
+        `http://localhost:5000/api/v1/account/${state.person._id}`,
+        {
+          email: state.person.email,
+          name: state.person.name,
+          classcode: Number(classcode),
+        }
+      );
+      console.log(res);
+      dispatch({
+        type: "JOIN_CLASSROOM",
+        payload: res.data.person,
+      });
+    } catch (err) {
+      dispatch({
+        type: "JOIN_CLASSROOM_ERROR",
+        payload: err.response,
+      });
+    }
+  }
 
-    return (
-      <GlobalContext.Provider
-        value={{
-          classrooms: state.classrooms,
-          classroom: state.classroom,
-          error: state.error,
-          loading: state.loading,
-          name: state.name,
-          assignment: state.assignment,
-          email: state.email,
-          isLoggedIn: state.isLoggedIn,
-          verificationStatus: state.verificationStatus,
-          allAnswerOfQuestion: state.allAnswerOfQuestion,
-          allQuestionOfClassRoom: state.allQuestionOfClassRoom,
-          person: state.person,
-          signupSuccess: state.signupSuccess,
-          getClassrooms,
-          userLogin,
-          getAssignment,
-          userLogout,
-          verifyUser,
-          getAssignmentsOfClassroom,
-          getAllAnswerOfQuestion,
-          getAllQuestionOfClassRoom,
-          addQuestion,
-          login,
-          signUp,
-          createClassroom,
-          getAssignmentsOfClassroom,
-          joinClassroom,
-        }}
-      >
-        {children}
-      </GlobalContext.Provider>
-    );
+  const addQuestion = async (classRoomId, question) => {
+    dispatch({
+      type: "Add_Question_RQST",
+    });
+    try {
+      const host = `http://localhost:5000`;
+      const URL = host + `/api/v1/discussion/classroom/${classRoomId}`;
+      question.authorId = state.userId;
+      console.log(question);
+      console.log(URL);
+
+      const response = await axios.post(URL, question);
+
+      console.log(response);
+      dispatch({
+        type: "AddingNewQuestion_RQST_SUCCESS",
+      });
+    } catch (error) {
+      console.log("Adding new Question failed", error);
+      dispatch({ type: "GET_RQST_ERROR" });
+    }
   };
-};
+
+  return (
+    <GlobalContext.Provider
+      value={{
+        classrooms: state.classrooms,
+        classroom: state.classroom,
+        error: state.error,
+        loading: state.loading,
+        name: state.name,
+        assignment: state.assignment,
+        email: state.email,
+        isLoggedIn: state.isLoggedIn,
+        verificationStatus: state.verificationStatus,
+        allAnswerOfQuestion: state.allAnswerOfQuestion,
+        allQuestionOfClassRoom: state.allQuestionOfClassRoom,
+        person: state.person,
+        signupSuccess: state.signupSuccess,
+        getClassrooms,
+        userLogin,
+        getAssignment,
+        userLogout,
+        verifyUser,
+        getAssignmentsOfClassroom,
+        getAllAnswerOfQuestion,
+        getAllQuestionOfClassRoom,
+        addQuestion,
+        login,
+        signUp,
+        createClassroom,
+        getAssignmentsOfClassroom,
+        joinClassroom,
+      }}
+    >
+      {children}
+    </GlobalContext.Provider>
+  );
+}
