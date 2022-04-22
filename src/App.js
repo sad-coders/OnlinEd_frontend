@@ -14,13 +14,14 @@ import Classrooms from "./components/student/classrooms/Classrooms";
 import AssignmentStream from "./components/student/AssignmentStream/AssignmentStream";
 import Login from "./components/auth/Login";
 import SignUp from "./components/auth/SignUp";
+import ClassroomCreation from "./components/student/classrooms/ClassroomCreation";
 
 function App() {
   return (
     <GlobalProvider>
       <BrowserRouter>
         <Routes>
-          <Route path="/student" element={<Classrooms />} />
+          <Route path="/student" element={<ClassroomCreation />} />
           <Route path="/faculty" element={<Home />} />
           <Route path="/upload" element={<UploadFile />} />
           <Route path="/verify/:userId" element={<Verify />} />

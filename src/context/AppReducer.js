@@ -3,8 +3,13 @@ const reducer =  (state , action) => {
     case 'GET_RQST_ERROR':
       return {
         ...state,
-        error: action.payload
+        error : action.payload
       }
+    case 'POST_RQST_ERROR' : 
+    return {
+      ...state,
+      error : action.payload
+    }
     case 'ASSIGNMENT_RQST_SUCCESS' : 
       return {
         ...state,
@@ -70,6 +75,16 @@ const reducer =  (state , action) => {
         ...state,
         signupSuccess: action.payload.auth
       }
+     case 'CLASSROOM_POST_RQST' : 
+     return {
+       ...state,
+       loading : true,
+     }
+     /*case 'ASSIGNMENT_POST_RQST' : return {
+       ...state,
+       loading : true,
+     }
+     */
     default : 
         return state
   }
