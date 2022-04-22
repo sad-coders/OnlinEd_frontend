@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Buffer } from "buffer";
 import axios from "axios";
 import "./UploadFile.css";
+import { Box } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 // import { deleteSolution } from "../../../../OnlinEd/controller/solutionController";
 
@@ -91,50 +92,69 @@ const UploadFile = () => {
   };
 
   return (
-    <div className="container">
-      <div className="row">
-        <div className="col-md-6">
-          <form method="post" onSubmit={onSubmit}>
-            <div className="form-group files">
-              <label>Upload Your File </label>
-              <input
-                type="file"
-                name="file"
-                onChange={onInputChange}
-                className="form-control"
-                multiple=""
-              />
-            </div>
+    <>
+      <form method="post" onSubmit={onSubmit}>
+        <div className="form-group files">
+          <label>Upload Your File </label>
+          <input
+            type="file"
+            name="file"
+            width={"0"}
+            onChange={onInputChange}
+            className="form-control"
+            multiple=""
+          />
+        </div>
+        <Button
+          variant="contained"
+          style={{
+            backgroundColor: 'green',
+            color: 'white',
+            margin : '10px'
+          }}
+          type="submit">
+          Upload Solution
+        </Button>
+      </form>
+      <Box
+      display = "flex"
+      justifyContents = "space-around"
+      >
+        <Button
+          variant="contained"
+          style={{
+            backgroundColor: 'red',
+            color: 'white',
+            margin : '10px'
+          }}
+          onClick={onDeleteSoltuion}
+          type="submit"
+        >
+          Delete Solution
+        </Button>
 
-            <Button variant="contained" color="primary" type="submit">
-              Upload Solution
-            </Button>
-          </form>
-          <Button
-            variant="outlined"
-            color="secondary"
-            onClick={onDeleteSoltuion}
-            type="submit"
-          >
-            Delete Solution
-          </Button>
+        <Button
+          variant="contained"
+          color="primary"
+          //display = "block"
+          style={{
+            margin : '10px'
+          }}
+          onClick={onDownloadSoltuion}
+          type="submit"
+        >
+          Download Solution
+        </Button>
+      </Box>
 
-          <Button
-            variant="contained"
-            color="secondary"
-            onClick={onDownloadSoltuion}
-            type="submit"
-          >
-            Download Solution
-          </Button>
-          {/* <href
+
+
+      {/* <href
             download={"solution.pdf"}
             // style={{ visibility: "hidden" }}
             id={"download"}
           ></href> */}
-        </div>
-      </div>
-    </div>
+    </>
   );
 };
 

@@ -7,7 +7,7 @@
   padding: 120px 0px 85px 35%;
   text-align: center !important;
   margin: 0;
-  width: 100% !important;
+  /*width: 100% !important;*/
 }
 .files input:focus {
   outline: 2px dashed #92b0b3;
