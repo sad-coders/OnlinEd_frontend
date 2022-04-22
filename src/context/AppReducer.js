@@ -75,7 +75,18 @@ const reducer =  (state , action) => {
         ...state,
         signupSuccess: action.payload.auth
       }
-     case 'CLASSROOM_POST_RQST' : 
+    case 'JOIN_CLASSROOM' : 
+      return {
+        ...state,
+        person: action.payload,
+        classrooms: action.payload.classrooms
+      }
+    case 'JOIN_CLASSROOM_ERROR': 
+      return {
+        ...state,
+        classroomError: action.payload
+      }
+    case 'CLASSROOM_POST_RQST' : 
      return {
        ...state,
        loading : true,
@@ -85,6 +96,7 @@ const reducer =  (state , action) => {
        loading : true,
      }
      */
+
     default : 
         return state
   }

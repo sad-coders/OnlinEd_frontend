@@ -1,7 +1,8 @@
-import { useContext, useEffect } from "react"
+import { useContext, useEffect, useRef } from "react"
 import { GlobalContext } from "../../../context/GlobalState"
 import { Grid } from "@material-ui/core"
 import ClassroomCard from './ClassroomCard'
+import ClassJoinCard from './ClassJoinCard'
 function Classrooms() {
     const { classrooms, loading, getClassrooms } = useContext(GlobalContext)
     useEffect(() => {
@@ -24,6 +25,7 @@ function Classrooms() {
                             </Grid>
                         )
                     }
+                    <ClassJoinCard />
 
                 </Grid>
             </>

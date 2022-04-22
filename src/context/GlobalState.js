@@ -15,7 +15,8 @@ const initialState = {
     verificationStatus: 'pending',
     verificationError: null,
     email: 'kd13@iitbbs.ac.in',
-    signupSuccess: false
+    signupSuccess: false,
+    person : {}
 }
 
 //Create Context
@@ -220,8 +221,30 @@ export const GlobalProvider = ({ children }) => {
                 type: 'AUTH_ERROR',
                 payload: err.response
             });
+        }   
+    }
+
+    async function joinClassroom(classcode){
+        // var {email, password, isFaculty, name} = person;
+        console.log(' Join class req recvd');
+        try {
+            // console.log(`http://localhost:5000/api/v1/account/${state.person._id}`)
+            const res = await axios.put(`http://localhost:5000/api/v1/account/${state.person._id}`, {
+                email: state.person.email,
+                name: state.person.name,
+                classcode: Number(classcode),
+            });
+            console.log(res);
+            dispatch({
+                type: 'JOIN_CLASSROOM',
+                payload: res.data.person
+            });
+        } catch (err) {
+            dispatch({
+                type: 'JOIN_CLASSROOM_ERROR',
+                payload: err.response
+            });
         }
-        
     }
     
     return (<GlobalContext.Provider value={{
@@ -244,7 +267,8 @@ export const GlobalProvider = ({ children }) => {
         login,
         signUp,
         createClassroom,
-        getAssignmentsOfClassroom
+        getAssignmentsOfClassroom,
+        joinClassroom
     }}>
         {children}
     </GlobalContext.Provider>)
