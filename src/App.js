@@ -7,6 +7,7 @@ import UploadFile from "./components/UploadFile/UploadFile.js";
 
 import { GlobalProvider } from "./context/GlobalState";
 import Assignment from "./components/student/Assignment/Assignment";
+import AssignmentMarks from "./components/student/Assignment/AssignmentMarks";
 
 import Verify from "./components/verify/Verify";
 
@@ -24,7 +25,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/student" element={<Classrooms />} />
-          <Route path="/faculty" element={<Classrooms />} />
+          <Route path="/assignmentmarks/:assignmentId" element={<AssignmentMarks />} />
           <Route path="/upload" element={<UploadFile />} />
           <Route path="/verify/:userId" element={<Verify />} />
 
