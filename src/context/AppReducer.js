@@ -52,6 +52,24 @@ const reducer =  (state , action) => {
        loading : false,
        classroom : action.payload
      }
+    case 'LOGIN_USER' :
+      return {
+        ...state,
+        isLoggedIn: action.payload.auth,
+        token: action.payload.token,
+        person: action.payload.person,
+        email: action.payload.person.email
+      }
+    case 'LOGIN_ERROR' : 
+      return {
+        ...state,
+        loginError: action.payload
+      }
+    case 'SIGNUP_USER' : 
+      return {
+        ...state,
+        signupSuccess: action.payload.auth
+      }
     default : 
         return state
   }

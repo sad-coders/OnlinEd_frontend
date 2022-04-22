@@ -12,6 +12,8 @@ import Verify from "./components/verify/Verify";
 
 import Classrooms from "./components/student/classrooms/Classrooms";
 import AssignmentStream from "./components/student/AssignmentStream/AssignmentStream";
+import Login from "./components/auth/Login";
+import SignUp from "./components/auth/SignUp";
 
 function App() {
   return (
@@ -22,7 +24,8 @@ function App() {
           <Route path="/faculty" element={<Home />} />
           <Route path="/upload" element={<UploadFile />} />
           <Route path="/verify/:userId" element={<Verify />} />
-          <Route path="/" element={<Home />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/" element={<Login />} />
         </Routes>
       </BrowserRouter>
     </GlobalProvider>
