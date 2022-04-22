@@ -1,63 +1,63 @@
-const reducer =  (state , action) => {
-  switch(action.type) {
-    case 'GET_RQST_ERROR':
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "GET_RQST_ERROR":
       return {
         ...state,
-        error : action.payload
-      }
-    case 'POST_RQST_ERROR' : 
-    return {
-      ...state,
-      error : action.payload
-    }
-    case 'ASSIGNMENT_RQST_SUCCESS' : 
+        error: action.payload,
+      };
+    case "POST_RQST_ERROR":
       return {
         ...state,
-        loading : false,
-        assignment : action.payload
-      }
-    case 'ASSIGNMENT_RQST' : 
+        error: action.payload,
+      };
+    case "ASSIGNMENT_RQST_SUCCESS":
       return {
         ...state,
-        loading : true,
-        assignment : {}
-      }  
-      case 'VERIFY_USER': 
-        return {
-          ...state,
-          verificationStatus: action.payload
-        }
-      case 'VERIFICATION_ERROR': 
-        return {
-          ...state,
-          verificationStatus: 'failed',
-          verificationError: action.payload
-        }
-    case 'CLASSROOMS_RQST' : 
+        loading: false,
+        assignment: action.payload,
+      };
+    case "ASSIGNMENT_RQST":
       return {
         ...state,
-        loading : true,
-        classrooms : []
-      }  
-    case 'CLASSROOMS_RQST_SUCCESS' : 
-    return {
-      ...state,
-      loading : false,
-      classrooms : action.payload
-    }  
-    case 'ASSIGNMENTS_RQST' :
-      return  {
-      ...state,
-      laoding : true,
-      classroom : []
-    }
-    case 'ASSIGNMENTS_RQST_SUCCESS' : 
-     return {
-       ...state,
-       loading : false,
-       classroom : action.payload
-     }
-    case 'LOGIN_USER' :
+        loading: true,
+        assignment: {},
+      };
+    case "VERIFY_USER":
+      return {
+        ...state,
+        verificationStatus: action.payload,
+      };
+    case "VERIFICATION_ERROR":
+      return {
+        ...state,
+        verificationStatus: "failed",
+        verificationError: action.payload,
+      };
+    case "CLASSROOMS_RQST":
+      return {
+        ...state,
+        loading: true,
+        classrooms: [],
+      };
+    case "CLASSROOMS_RQST_SUCCESS":
+      return {
+        ...state,
+        loading: false,
+        classrooms: action.payload,
+      };
+    case "ASSIGNMENTS_RQST":
+      return {
+        ...state,
+        laoding: true,
+        classroom: [],
+      };
+    case "ASSIGNMENTS_RQST_SUCCESS":
+      return {
+        ...state,
+        loading: false,
+        classroom: action.payload,
+      };
+    case "LOGIN_USER":
       return {
         ...state,
         isLoggedIn: action.payload.auth,
@@ -70,38 +70,67 @@ const reducer =  (state , action) => {
     case 'LOGIN_ERROR' : 
       return {
         ...state,
-        loginError: action.payload
-      }
-    case 'SIGNUP_USER' : 
+        loginError: action.payload,
+      };
+    case "SIGNUP_USER":
       return {
         ...state,
-        signupSuccess: action.payload.auth
-      }
-    case 'JOIN_CLASSROOM' : 
+        signupSuccess: action.payload.auth,
+      };
+    case "JOIN_CLASSROOM":
       return {
         ...state,
         person: action.payload,
-        classrooms: action.payload.classrooms
-      }
-    case 'JOIN_CLASSROOM_ERROR': 
+        classrooms: action.payload.classrooms,
+      };
+    case "JOIN_CLASSROOM_ERROR":
       return {
         ...state,
-        classroomError: action.payload
-      }
-    case 'CLASSROOM_POST_RQST' : 
-     return {
-       ...state,
-       loading : true,
-     }
-     /*case 'ASSIGNMENT_POST_RQST' : return {
+        classroomError: action.payload,
+      };
+    case "CLASSROOM_POST_RQST":
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case "Questions_RQST":
+      return {
+        ...state,
+        loading: true,
+      };
+    case "Answers_RQST":
+      return {
+        ...state,
+        loading: true,
+      };
+    case "Add_Question_RQST":
+      return { ...state, loading: true };
+
+    case "AddingNewQuestion_RQST_SUCCESS":
+      return { ...state, loading: false };
+
+    case "ALLQUESTION_RQST_SUCCESS":
+      return {
+        ...state,
+        loading: false,
+        allQuestionOfClassRoom: action.payload,
+      };
+    case "AllANSWER_RQST_SUCCESS":
+      return {
+        ...state,
+        loading: false,
+        allAnswerOfQuestion: action.payload,
+      };
+    /*case 'ASSIGNMENT_POST_RQST' : return {
        ...state,
        loading : true,
      }
      */
 
-    default : 
-        return state
+    default:
+      return state;
   }
-}
+};
 
 export default reducer;

@@ -10,6 +10,8 @@ import Assignment from "./components/student/Assignment/Assignment";
 
 import Verify from "./components/verify/Verify";
 
+import Discussion from "./components/Discussion/Discussion";
+import QuestionPage from "./components/Discussion/QuestionPage";
 import Classrooms from "./components/student/classrooms/Classrooms";
 import AssignmentStream from "./components/student/AssignmentStream/AssignmentStream";
 import Login from "./components/auth/Login";
@@ -25,6 +27,15 @@ function App() {
           <Route path="/faculty" element={<Classrooms />} />
           <Route path="/upload" element={<UploadFile />} />
           <Route path="/verify/:userId" element={<Verify />} />
+
+          <Route
+            path="/classroom/:classRoomId/discussion"
+            element={<Discussion />}
+          />
+          <Route
+            path="/classroom/:classRoomId/discussion/question"
+            element={<QuestionPage />}
+          />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/" element={<Login />} />
         </Routes>
