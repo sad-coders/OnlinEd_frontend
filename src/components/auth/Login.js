@@ -56,9 +56,7 @@ const Login = () => {
     useEffect(() => {
         // var isAuthenticated = false;
         if (isLoggedIn) {
-            if(person.isStudent)
-                navigate("/student") 
-            else navigate("/faculty") 
+                navigate("/classrooms") 
         }
         // isAuthenticated is in dependency list
     }, [isLoggedIn, person]);

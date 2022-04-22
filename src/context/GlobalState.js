@@ -5,9 +5,18 @@ import axios from "axios";
 
 const initialState = {
   classrooms: [],
-  classroom: {},
+  classroom: {
+    assignments : []
+  },
   error: null,
-  assignment: {},
+  assignment: {
+    authorName: '',
+    dueDate: null,
+    postedOn: null,
+    assignmentTitle: '',
+    content: '',
+    link:''
+  },
   loading: true,
   name: "",
   isLoggedIn: false,
@@ -60,15 +69,15 @@ export const GlobalProvider = ({ children }) => {
     }
   }
 
-  async function getAssignment() {
-    const assignment_id = "626136a285ed27c9426ef3b7";
+  async function getAssignment(assignmentId) {
+    console.log("get assignment gc",assignmentId)
     // if(state.isLoggedIn){
     dispatch({
       type: "ASSIGNMENT_RQST",
     });
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/v1/assignment/${assignment_id}`
+        `http://localhost:5000/api/v1/assignment/${assignmentId}`
       );
       console.log("get assignment", response.data);
       dispatch({
@@ -84,9 +93,9 @@ export const GlobalProvider = ({ children }) => {
     }
     // }
   }
-
-  async function getAssignmentsOfClassroom() {
-    const classroom_id = "62612846f02b0d51c0e019e7";
+  
+  async function getAssignmentsOfClassroom(classroomId) {
+    const classroom_id = classroomId;
     // if(state.isLoggedIn){
     dispatch({
       type: "ASSIGNMENTS_RQST",

@@ -20,7 +20,6 @@ const reducer = (state, action) => {
       return {
         ...state,
         loading: true,
-        assignment: {},
       };
     case "VERIFY_USER":
       return {
@@ -48,8 +47,10 @@ const reducer = (state, action) => {
     case "ASSIGNMENTS_RQST":
       return {
         ...state,
-        laoding: true,
-        classroom: [],
+        loading: true,
+        classroom: {
+          assignments : []
+        },
       };
     case "ASSIGNMENTS_RQST_SUCCESS":
       return {
