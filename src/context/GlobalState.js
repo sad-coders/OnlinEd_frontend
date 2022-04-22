@@ -10,6 +10,7 @@ const initialState = {
     assignment:{},
     loading: true,
     name: '',
+    isFaculty : false,
     isLoggedIn: true,
     verificationStatus: 'pending',
     verificationError: null,
@@ -72,6 +73,7 @@ export const GlobalProvider = ({ children }) => {
             }
         }
     }
+
     async function getAssignmentsOfClassroom(){
         const classroom_id = '625aff95d6e1aa155ca582c1';
         if(state.isLoggedIn){
@@ -93,6 +95,43 @@ export const GlobalProvider = ({ children }) => {
             }
         }
     }
+    async function createClassroom(className){
+        console.log("class creation in progress")
+        dispatch({
+            type : 'CLASSROOM_POST_RQST'
+        })
+        try{
+            const response = await axios.post('/api/v1/classroom/',{
+                className
+            })
+            if(response.status===201){
+                window.location.reload()
+            }
+        }catch(error){
+            dispatch({
+                type : 'POST_RQST_ERROR',
+                payload : error
+            })
+        }
+    }
+    /*async function postAssignment(assignment){
+        dispatch({
+            type : 'ASSIGNMENT_POST_RQST'
+        })
+        try{
+            console.log("post assignment",assignment)
+            const response = await axios.post(`/api/v1/assignment/`,assignment)
+            console.log(response)
+            
+
+        }catch(error){
+            console.log("post assignments",error)
+            dispatch({
+                type : 'POST_RQST_ERROR',
+                payload : error
+            })
+        }
+    }*/
     function userLogout() {
         dispatch({
             type: 'USER_LOGOUT'
@@ -153,6 +192,7 @@ export const GlobalProvider = ({ children }) => {
         getAssignment,
         userLogout,
         verifyUser,
+        createClassroom,
         getAssignmentsOfClassroom
     }}>
         {children}
