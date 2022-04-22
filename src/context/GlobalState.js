@@ -17,7 +17,7 @@ const initialState = {
     content: '',
     link:''
   },
-  loading: true,
+  loading: false,
   name: "",
   isLoggedIn: false,
   isFaculty: false,
@@ -34,6 +34,7 @@ const initialState = {
   solutionsOfAssignment: [],
 };
 
+const URL = 'http://localhost:5000';
 //Create Context
 export const GlobalContext = createContext(initialState);
 
@@ -52,7 +53,7 @@ export const GlobalProvider = ({ children }) => {
           type: "CLASSROOMS_RQST",
         });
         const res = await axios.get(
-          `http://localhost:5000/api/v1/classroom?email=${email}`,
+          `${URL}/api/v1/classroom?email=${email}`,
           {
             headers: { "Content-Type": "application/json" },
           }
@@ -79,7 +80,7 @@ export const GlobalProvider = ({ children }) => {
     });
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/v1/assignment/${assignmentId}`
+        `${URL}/api/v1/assignment/${assignmentId}`
       );
       console.log("get assignment", response.data);
       dispatch({
@@ -104,7 +105,7 @@ export const GlobalProvider = ({ children }) => {
     });
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/v1/classroom/${classroom_id}`
+        `${URL}/api/v1/classroom/${classroom_id}`
       );
       console.log("get assignments", response.data);
       dispatch({
@@ -190,7 +191,7 @@ export const GlobalProvider = ({ children }) => {
     console.log(" UserId sent for verification is " + userId);
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/v1/auth/verify/" + userId
+        `${URL}/api/v1/auth/verify/` + userId
       );
 
       dispatch({
@@ -211,7 +212,7 @@ export const GlobalProvider = ({ children }) => {
         type: "Questions_RQST",
       });
       try {
-        const host = `http://localhost:5000`;
+        const host = `${URL}`;
         const URL = host + `/api/v1/discussion/classroom/${classRoomId}`;
         const response = await axios.get(URL);
 
@@ -235,7 +236,7 @@ export const GlobalProvider = ({ children }) => {
       type: "Answers_RQST",
     });
     try {
-      const host = `http://localhost:5000`;
+      const host = `${URL}`;
       const URL =
         host +
         `/api/v1/discussion/classroom/${classRoomId}/question/${questionId}`;
@@ -256,7 +257,7 @@ export const GlobalProvider = ({ children }) => {
     console.log(" Login req sent for  " + email + " with pass " + password);
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/v1/auth/login/",
+        `${URL}/api/v1/auth/login/`,
         {
           email,
           password,
@@ -280,7 +281,7 @@ export const GlobalProvider = ({ children }) => {
     console.log(" SignUp req recvd");
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/v1/auth/signup/",
+        `${URL}/api/v1/auth/signup/`,
         {
           email,
           password,
@@ -306,9 +307,9 @@ export const GlobalProvider = ({ children }) => {
     // var {email, password, isFaculty, name} = person;
     console.log(" Join class req recvd");
     try {
-      // console.log(`http://localhost:5000/api/v1/account/${state.person._id}`)
+      // console.log(`${URL}/api/v1/account/${state.person._id}`)
       const res = await axios.put(
-        `http://localhost:5000/api/v1/account/${state.person._id}`,
+        `${URL}/api/v1/account/${state.person._id}`,
         {
           email: state.person.email,
           name: state.person.name,
@@ -333,7 +334,7 @@ export const GlobalProvider = ({ children }) => {
       type: "Add_Question_RQST",
     });
     try {
-      const host = `http://localhost:5000`;
+      const host = `${URL}`;
       const URL = host + `/api/v1/discussion/classroom/${classRoomId}`;
       question.authorId = state.userId;
       console.log(question);
@@ -354,8 +355,8 @@ export const GlobalProvider = ({ children }) => {
   async function getSolutionsOfAssignment(assignmentId) {
     console.log(" get solns ");
     try {
-      // console.log(`http://localhost:5000/api/v1/account/${state.person._id}`)
-      const res = await axios.get(`http://localhost:5000/api/v1/solution/assignment/${assignmentId}`);
+      // console.log(`${URL}/api/v1/account/${state.person._id}`)
+      const res = await axios.get(`${URL}/api/v1/solution/assignment/${assignmentId}`);
       console.log(res);
       dispatch({
         type: "GET_SOLUTIONS",
@@ -372,9 +373,9 @@ export const GlobalProvider = ({ children }) => {
   async function assignMarks(marks, solutionId) {
     console.log(" assign marks req recvd");
     try {
-      // console.log(`http://localhost:5000/api/v1/account/${state.person._id}`)
+      // console.log(`${URL}/api/v1/account/${state.person._id}`)
       const res = await axios.put(
-        `http://localhost:5000/api/v1/solution`,
+        `${URL}/api/v1/solution`,
         {
           solution : {
             _id: solutionId,
