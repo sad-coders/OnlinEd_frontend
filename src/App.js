@@ -26,6 +26,9 @@ function App() {
         <Routes>
           <Route path="/student" element={<Classrooms />} />
           <Route path="/assignmentmarks/:assignmentId" element={<AssignmentMarks />} />
+          <Route path="/classrooms" element={<Classrooms />} />
+          
+          <Route path="/faculty" element={<Classrooms />} />
           <Route path="/upload" element={<UploadFile />} />
           <Route path="/verify/:userId" element={<Verify />} />
 
@@ -38,6 +41,8 @@ function App() {
             element={<QuestionPage />}
           />
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/classroom/:classroomId" element={<AssignmentStream/>}/>
+          <Route path="/assignment/:assignmentId" element={<Assignment/>}/>
           <Route path="/" element={<Login />} />
         </Routes>
       </BrowserRouter>

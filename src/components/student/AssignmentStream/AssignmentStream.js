@@ -1,14 +1,19 @@
-import { useContext, useEffect } from "react"
+import { useContext, useEffect, useState } from "react"
 import { GlobalContext } from "../../../context/GlobalState"
 import Assignments from "./Assignments"
+import { useParams } from "react-router-dom"
 import AssignmentStreamHeader from "./AssignmentStreamHeader"
 import {Grid} from '@mui/material'
 function AssignmentStream() {
-
+    const {classroomId} = useParams();
+    console.log("assignment stream classroom id",classroomId)
+    
     const { loading, classroom, getAssignmentsOfClassroom } = useContext(GlobalContext)
-    useEffect(() => {
-        getAssignmentsOfClassroom()
-    }, [])
+
+    console.log("assignment stream",loading)
+    useEffect(()=>{
+        getAssignmentsOfClassroom(classroomId)
+    },[])
     return (loading ? "loading" :
 
         <Grid

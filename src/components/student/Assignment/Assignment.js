@@ -5,12 +5,21 @@ import AssignmentHeader from "./AssignmentHeader"
 import { Container, Divider } from "@material-ui/core"
 import AssignmentSubmission from "./AssignmentSubmission"
 import { Grid } from "@material-ui/core"
+import { useLocation, useParams } from "react-router-dom"
 const Assignment = () => {
+    const location = useLocation();
+    console.log("assignment loc",location);
     const { loading, assignment, getAssignment } = useContext(GlobalContext)
+    const {assignmentId} = useParams()
+    console.log("assignment id",assignmentId)
+    console.log("assignment",assignment)
 
     useEffect(() => {
-        getAssignment()
-    }, [])
+       getAssignment(assignmentId)
+       console.log("hello word:(")
+    }, [assignmentId]);
+    // const location = useLocation();
+    // console.log("assignment loc",location);
     return (
         <>
             {

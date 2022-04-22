@@ -23,7 +23,10 @@ function Classrooms() {
                     {
                         classrooms.map((classroom, i) =>
                             <Grid item key={i + 1} >
-                                <Link  to={`/classroom`}>
+                                <Link  
+                                to={`/classroom/${classroom.classroomId}/`}
+                                style={{ textDecoration: "none", color: "inherit" }}
+                                >
                                 <ClassroomCard classroom={classroom} />
                                 </Link>
                             </Grid>
