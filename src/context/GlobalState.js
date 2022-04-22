@@ -14,7 +14,7 @@ const initialState = {
     isFaculty : false, 
     verificationStatus: 'pending',
     verificationError: null,
-    email: 'kd13@iitbbs.ac.in',
+    email: 'tss11@iitbbs.ac.in',
     signupSuccess: false,
     person : {}
 }
@@ -102,9 +102,11 @@ export const GlobalProvider = ({ children }) => {
         dispatch({
             type : 'CLASSROOM_POST_RQST'
         })
+        const personId = "626126cdd3990228bb87b725"
         try{
             const response = await axios.post('/api/v1/classroom/',{
-                className
+                className,
+                personId
             })
             if(response.status===201){
                 window.location.reload()

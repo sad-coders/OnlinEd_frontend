@@ -8,7 +8,7 @@ const useStyles = makeStyles({
 });
 const ClassroomCard = ({ classroom }) => {
   const classes = useStyles();
-
+  console.log("classroom card",classroom)
   return (
     <Card className={classes.root} variant="outlined" style={dayCardStyle}>
       <CardActionArea>
