@@ -7,8 +7,9 @@ import { Box } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 // import { deleteSolution } from "../../../../OnlinEd/controller/solutionController";
 
-const UploadFile = ({assignment}) => {
-  const { person , token } = useContext(GlobalContext)
+const UploadFile = () => {
+  const URL = "http://localhost:5000" //"https://onlined-be.azurewebsites.net";
+  const { assignment, person , token } = useContext(GlobalContext)
   const [file, setFile] = useState(null);
 
   const onInputChange = (e) => {
@@ -21,10 +22,10 @@ const UploadFile = ({assignment}) => {
     e.preventDefault();
     const AssignmentId = assignment._id;
     const StudentId = person._id;
-    const URL = `https://onlined-be.azurewebsites.net/api/v1/solution`;
+    const URL1 = `${URL}/api/v1/solution`;
 
     axios
-      .delete(URL, {
+      .delete(URL1, {
         headers: {
           "content-type": "application/json", "Authorization" : token
         },
@@ -42,10 +43,10 @@ const UploadFile = ({assignment}) => {
     e.preventDefault();
     const AssignmentId = assignment._id;
     const StudentId = person._id;
-    const URL = `https://onlined-be.azurewebsites.net/api/v1/solution/assignment/${AssignmentId}/student/${StudentId}`;
+    const URL1 = `${URL}/api/v1/solution/assignment/${AssignmentId}/student/${StudentId}`;
 
     axios
-      .get(URL, {
+      .get(URL1, {
         responseType: "arraybuffer",
         // headers: {
         //   "Content-Type": "application/json",
@@ -70,23 +71,28 @@ const UploadFile = ({assignment}) => {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    const data = new FormData();
+    var data = new FormData();
 
     const solution = {
       studentId: person._id,
       assignmentId: assignment._id,
+      studentName: person.name,
       link: "",
       date: "2022-09-27",
       deadline: "2022-11-29",
     };
 
     data.append("file", file);
+    console.log(data)
+    console.log(solution);
+    console.log(assignment)
     data.append("solution", JSON.stringify(solution));
-
+    for (var key of data.entries()) {
+      console.log(key[0] + ', ' + key[1]);
+  }
+    console.log(data)
     axios
-      .post("https://onlined-be.azurewebsites.net/api/v1/solution", {
-        headers: { "Content-Type": "application/json" ,"Authorization" : token}
-      }, data)
+      .post(`${URL}/api/v1/solution`, data)
       .then((res) => {
         console.log(res.statusText);
       })

@@ -34,7 +34,8 @@ const initialState = {
   solutionsOfAssignment: [],
 };
 
-const URL = 'https://onlined-be.azurewebsites.net'//'http://localhost:5000';
+const URL = 'http://localhost:5000';
+// 'https://onlined-be.azurewebsites.net'
 //Create Context
 export const GlobalContext = createContext(initialState);
 

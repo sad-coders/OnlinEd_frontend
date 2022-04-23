@@ -20,10 +20,12 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';  
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-
+import axios from "axios";
+//Initial State
 const drawerWidth = 480;
 
 const AssignmentMarks = () => {
+    const URL = "http://localhost:5000" //"https://onlined-be.azurewebsites.net";
     const navigate = useNavigate();
     const { assignmentId } = useParams();
     const { loading , solutionsOfAssignment, getSolutionsOfAssignment, assignMarks} = useContext(GlobalContext);
@@ -36,6 +38,36 @@ const AssignmentMarks = () => {
         getSolutionsOfAssignment(assignmentId)
         console.log(solutionsOfAssignment)
     }, []);
+
+    const onDownloadSolution = (e) => {
+        e.preventDefault();
+        const AssignmentId = solution.assignmentId;
+        const StudentId = solution.studentId;
+        const URL1 = `${URL}/api/v1/solution/assignment/${AssignmentId}/student/${StudentId}`;
+    
+        axios
+          .get(URL1, {
+            responseType: "arraybuffer",
+            // headers: {
+            //   "Content-Type": "application/json",
+            //   Accept: "application/pdf",
+            // },
+          })
+          .then((res) => {
+            // console.log(res.data);
+    
+            const url = window.URL.createObjectURL(new Blob([res.data]));
+            const link = document.createElement("a");
+            link.href = url;
+            link.setAttribute("download", "sol.pdf");
+            document.body.appendChild(link);
+            link.click();
+          })
+          .catch((e) => {
+            console.error("Error", e);
+          });
+      };
+    
     // useEffect(() => {
     //   setsolutions(solutionsOfAssignment)
     // }, [solutionsOfAssignment])
@@ -140,8 +172,9 @@ const AssignmentMarks = () => {
                                 }
                                 <Box display='flex' flexDirection='column' justifyContent='center' alignItems='center'>
                                     
-                                    <Button onClick={() => {
+                                    <Button onClick={(e) => {
                                         // TODO
+                                        onDownloadSolution(e)
                                     }}>
                                         Download Submission
                                     </Button>
