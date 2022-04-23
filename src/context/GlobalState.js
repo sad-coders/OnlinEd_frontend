@@ -371,9 +371,11 @@ export const GlobalProvider = ({ children }) => {
       // console.log(`${URL}/api/v1/account/${state.person._id}`)
       const res = await axios.get(`${URL}/api/v1/solution/assignment/${assignmentId}`);
       console.log(res);
+      var ans = []
+      if(res.data.solutions.length > 0) ans = res.data.solutions;
       dispatch({
         type: "GET_SOLUTIONS",
-        payload: res.data.solutions,
+        payload: ans,
       });
     } catch (err) {
       dispatch({

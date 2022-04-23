@@ -73,7 +73,7 @@ const AssignmentMarks = () => {
                             Submissions for Assignment
                         </Typography>
                         {/* TODO: CHANGE LINK */}
-                        <Typography variant="p" noWrap component={Link} to={"/" + 's'}
+                        <Typography variant="p" noWrap component={Link} to={"/assignment/" + assignmentId}
                             style={{ textDecoration: "underline", color: "inherit", marginLeft:"50px" }} >
                             View Assignment Question
                         </Typography>
@@ -167,7 +167,9 @@ const AssignmentMarks = () => {
                                     </Button>
                                 </Box>
                             </>
-                        ) : (<></>)
+                        ) : 
+                            (solutionsOfAssignment.length > 0 ? (<>No submissions made yet</>) : (<></>))
+                        
                     }
                     {/* "_id" : ObjectId("626136a385ed27c9426ef3b8"),
                     "studentName" : "studentName",
