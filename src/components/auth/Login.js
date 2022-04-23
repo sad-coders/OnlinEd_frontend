@@ -52,7 +52,7 @@ const Login = () => {
     // const state = useSelector(state => state.state)
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-
+    
     useEffect(() => {
         // var isAuthenticated = false;
         if (isLoggedIn) {

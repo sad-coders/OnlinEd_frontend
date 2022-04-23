@@ -4,6 +4,7 @@ import Assignments from "./Assignments"
 import { useParams } from "react-router-dom"
 import AssignmentStreamHeader from "./AssignmentStreamHeader"
 import {Grid} from '@mui/material'
+import Loader from "../../Loader"
 function AssignmentStream() {
     const {classroomId} = useParams();
     console.log("assignment stream classroom id",classroomId)
@@ -14,7 +15,7 @@ function AssignmentStream() {
     useEffect(()=>{
         getAssignmentsOfClassroom(classroomId)
     },[])
-    return (loading ? "loading" :
+    return (loading ? <Loader/>:
 
         <Grid
             container

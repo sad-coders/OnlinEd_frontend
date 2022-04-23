@@ -26,7 +26,7 @@ const initialState = {
   email: "tss11@iitbbs.ac.in",
   signupSuccess: false,
   person: {},
-
+  token:null,
   userId: "004",
   allQuestionOfClassRoom: [],
   allAnswerOfQuestion: [],
@@ -50,9 +50,8 @@ export const GlobalProvider = ({ children }) => {
           type: "CLASSROOMS_RQST",
         });
         const res = await axios.get(
-          `http://localhost:5000/api/v1/classroom?email=${email}`,
-          {
-            headers: { "Content-Type": "application/json" },
+          `http://localhost:5000/api/v1/classroom?email=${email}`,{
+            headers: { "Content-Type": "application/json" ,"Authorization" : `${state.token}`}
           }
         );
         console.log("get classrooms", res.data);
@@ -77,7 +76,9 @@ export const GlobalProvider = ({ children }) => {
     });
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/v1/assignment/${assignmentId}`
+        `http://localhost:5000/api/v1/assignment/${assignmentId}`,{
+          headers: { "Content-Type": "application/json" ,"Authorization" : `${state.token}`}
+        }
       );
       console.log("get assignment", response.data);
       dispatch({
@@ -102,7 +103,9 @@ export const GlobalProvider = ({ children }) => {
     });
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/v1/classroom/${classroom_id}`
+        `http://localhost:5000/api/v1/classroom/${classroom_id}`,{
+          headers: { "Content-Type": "application/json" ,"Authorization" : `${state.token}`}
+        }
       );
       console.log("get assignments", response.data);
       dispatch({
@@ -127,6 +130,8 @@ export const GlobalProvider = ({ children }) => {
       const response = await axios.post("/api/v1/classroom/", {
         className,
         personId,
+      },{
+        headers: { "Content-Type": "application/json" ,"Authorization" : `${state.token}`}
       });
       if (response.status === 201) {
         window.location.reload();
@@ -171,7 +176,6 @@ export const GlobalProvider = ({ children }) => {
     const email = data.email;
     try {
       const res = await axios.get(`api/v1/classrooms/${email}`);
-
       dispatch({
         type: "GET_CLASSROOMS",
         payload: res.data.data,
@@ -211,7 +215,9 @@ export const GlobalProvider = ({ children }) => {
       try {
         const host = `http://localhost:5000`;
         const URL = host + `/api/v1/discussion/classroom/${classRoomId}`;
-        const response = await axios.get(URL);
+        const response = await axios.get(URL,{
+          headers: { "Content-Type": "application/json" ,"Authorization" : `${state.token}`}
+        });
 
         dispatch({
           type: "ALLQUESTION_RQST_SUCCESS",
@@ -238,7 +244,9 @@ export const GlobalProvider = ({ children }) => {
         host +
         `/api/v1/discussion/classroom/${classRoomId}/question/${questionId}`;
 
-      const response = await axios.get(URL);
+      const response = await axios.get(URL,{
+        headers: { "Content-Type": "application/json" ,"Authorization" : `${state.token}`}
+      });
 
       dispatch({
         type: "AllANSWER_RQST_SUCCESS",
@@ -311,8 +319,9 @@ export const GlobalProvider = ({ children }) => {
           email: state.person.email,
           name: state.person.name,
           classcode: Number(classcode),
-        }
-      );
+        },{
+          headers: { "Content-Type": "application/json" ,"Authorization" : `${state.token}`}
+        });
       console.log(res);
       dispatch({
         type: "JOIN_CLASSROOM",
@@ -337,7 +346,9 @@ export const GlobalProvider = ({ children }) => {
       console.log(question);
       console.log(URL);
 
-      const response = await axios.post(URL, question);
+      const response = await axios.post(URL, question,{
+        headers: { "Content-Type": "application/json" ,"Authorization" : `${state.token}`}
+      });
 
       console.log(response);
       dispatch({
@@ -365,6 +376,7 @@ export const GlobalProvider = ({ children }) => {
         allQuestionOfClassRoom: state.allQuestionOfClassRoom,
         person: state.person,
         signupSuccess: state.signupSuccess,
+        token:state.token,
         getClassrooms,
         userLogin,
         getAssignment,

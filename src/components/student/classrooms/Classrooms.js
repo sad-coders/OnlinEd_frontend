@@ -5,13 +5,14 @@ import { Grid } from "@material-ui/core"
 import ClassroomCard from './ClassroomCard'
 import ClassroomCreation from "./ClassroomCreation"
 import ClassJoinCard from './ClassJoinCard'
+import Loader from "../../Loader"
 function Classrooms() {
     const { classrooms, loading, getClassrooms, isFaculty } = useContext(GlobalContext)
     useEffect(() => {
         getClassrooms()
     }, [])
     return (
-        loading ? "loading" : (
+        loading ? <Loader/> : (
             <>
                 <Grid
                     container
