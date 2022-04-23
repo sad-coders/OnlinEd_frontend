@@ -280,7 +280,7 @@ export const GlobalProvider = ({ children }) => {
       });
     } catch (err) {
       dispatch({
-        type: "AUTH_ERROR",
+        type: "LOGIN_ERROR",
         payload: err.response,
       });
     }

@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState , useContext} from "react";
+import { GlobalContext } from "../../context/GlobalState"
 import { Buffer } from "buffer";
 import axios from "axios";
 import "./UploadFile.css";
@@ -6,7 +7,8 @@ import { Box } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 // import { deleteSolution } from "../../../../OnlinEd/controller/solutionController";
 
-const UploadFile = () => {
+const UploadFile = ({assignment}) => {
+  const { person , token } = useContext(GlobalContext)
   const [file, setFile] = useState(null);
 
   const onInputChange = (e) => {
@@ -17,14 +19,14 @@ const UploadFile = () => {
 
   const onDeleteSoltuion = (e) => {
     e.preventDefault();
-    const AssignmentId = "75";
-    const StudentId = "78";
+    const AssignmentId = assignment._id;
+    const StudentId = person._id;
     const URL = `https://onlined-be.azurewebsites.net/api/v1/solution`;
 
     axios
       .delete(URL, {
         headers: {
-          "content-type": "application/json",
+          "content-type": "application/json", "Authorization" : token
         },
         data: { AssignmentId: AssignmentId, StudentId: StudentId },
       })
@@ -38,8 +40,8 @@ const UploadFile = () => {
 
   const onDownloadSoltuion = (e) => {
     e.preventDefault();
-    const AssignmentId = "75";
-    const StudentId = "78";
+    const AssignmentId = assignment._id;
+    const StudentId = person._id;
     const URL = `https://onlined-be.azurewebsites.net/api/v1/solution/assignment/${AssignmentId}/student/${StudentId}`;
 
     axios
@@ -71,8 +73,8 @@ const UploadFile = () => {
     const data = new FormData();
 
     const solution = {
-      studentId: "78",
-      assignmentId: "75",
+      studentId: person._id,
+      assignmentId: assignment._id,
       link: "",
       date: "2022-09-27",
       deadline: "2022-11-29",
@@ -82,7 +84,9 @@ const UploadFile = () => {
     data.append("solution", JSON.stringify(solution));
 
     axios
-      .post("https://onlined-be.azurewebsites.net/api/v1/solution", data)
+      .post("https://onlined-be.azurewebsites.net/api/v1/solution", {
+        headers: { "Content-Type": "application/json" ,"Authorization" : token}
+      }, data)
       .then((res) => {
         console.log(res.statusText);
       })

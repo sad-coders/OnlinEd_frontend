@@ -52,7 +52,7 @@ const Assignment = () => {
                             </Grid>
 
                             <Grid item>
-                                <AssignmentSubmission />
+                                <AssignmentSubmission assignment={assignment} />
                             </Grid>
                         </Grid>
                     </>
