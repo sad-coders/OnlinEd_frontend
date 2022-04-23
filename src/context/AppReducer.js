@@ -128,7 +128,22 @@ const reducer = (state, action) => {
        loading : true,
      }
      */
-
+    case 'GET_SOLUTIONS':
+      return {
+        ...state,
+        solutionsOfAssignment: action.payload,
+        // loading: false
+      }
+      case 'GET_SOLUTIONS_ERROR':
+        return {
+          ...state,
+          error: action.payload
+        }
+      case 'ASSIGN_MARKS':
+        return {
+          ...state,
+          solutionsOfAssignment: action.payload
+        }
     default:
       return state;
   }
