@@ -30,7 +30,7 @@ const initialState = {
   userId: "004",
   allQuestionOfClassRoom: [],
   allAnswerOfQuestion: [],
-
+  message: null,
   solutionsOfAssignment: [],
 };
 
@@ -436,6 +436,7 @@ export const GlobalProvider = ({ children }) => {
         signupSuccess: state.signupSuccess,
         token:state.token,
         solutionsOfAssignment: state.solutionsOfAssignment,
+        message: state.message,
         getClassrooms,
         // userLogin,
         getAssignment,

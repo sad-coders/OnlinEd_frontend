@@ -15,6 +15,8 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
 
 import { GlobalContext } from "../../context/GlobalState";
 import { useNavigate } from 'react-router-dom';
@@ -45,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
 const Login = () => {
     let navigate = useNavigate();
   
-    const { login, isLoggedIn, person} = useContext(GlobalContext)
+    const { login, isLoggedIn, person, message, signupSuccess} = useContext(GlobalContext)
 
     const classes = useStyles();
 
@@ -128,6 +130,20 @@ const Login = () => {
                         </Grid>
                     </Grid>
                 </form>
+                {
+                    message &&  signupSuccess ? (
+                        <Alert severity="succes">
+                            <AlertTitle>SignUp Success</AlertTitle>
+                            Please Login to continue
+                        </Alert>
+                    ):(<></>)
+                }
+                {message ? (
+                        <Alert severity="error">
+                            <AlertTitle>Error</AlertTitle>
+                            Login failed please try again!
+                        </Alert>) : (<></>)
+                }
             </div>
             {/* <Box mt={8}>
                 <Footer />

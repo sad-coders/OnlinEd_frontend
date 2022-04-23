@@ -19,7 +19,7 @@ const UploadFile = () => {
     e.preventDefault();
     const AssignmentId = "75";
     const StudentId = "78";
-    const URL = `//localhost:5000/api/v1/solution`;
+    const URL = `https://onlined-be.azurewebsites.net/api/v1/solution`;
 
     axios
       .delete(URL, {
@@ -40,7 +40,7 @@ const UploadFile = () => {
     e.preventDefault();
     const AssignmentId = "75";
     const StudentId = "78";
-    const URL = `//localhost:5000/api/v1/solution/assignment/${AssignmentId}/student/${StudentId}`;
+    const URL = `https://onlined-be.azurewebsites.net/api/v1/solution/assignment/${AssignmentId}/student/${StudentId}`;
 
     axios
       .get(URL, {
@@ -82,7 +82,7 @@ const UploadFile = () => {
     data.append("solution", JSON.stringify(solution));
 
     axios
-      .post("//localhost:5000/api/v1/solution", data)
+      .post("https://onlined-be.azurewebsites.net/api/v1/solution", data)
       .then((res) => {
         console.log(res.statusText);
       })
