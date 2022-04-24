@@ -157,7 +157,7 @@ const UploadFile = () => {
           Upload Solution
         </Button>
       </form>
-      {solution.link ? 
+      {solution && solution.link ? 
         (<>
           Submitted on: {solution.dateOfSubmission}
           <Box display="flex" justifyContents="space-around">   

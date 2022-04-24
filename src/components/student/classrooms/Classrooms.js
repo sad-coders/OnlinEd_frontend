@@ -50,7 +50,7 @@ function Classrooms() {
                     }
 
                     {
-                        message ? (
+                        message === 'Classroom created. ReLogin to proceed!' ? (
                             <Typography severity="succes">
                                 <p>Classroom created Successfully</p>
                                 Please ReLogin to continue
