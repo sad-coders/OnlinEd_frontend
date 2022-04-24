@@ -33,7 +33,7 @@ const initialState = {
   message: null,
   solutionsOfAssignment: [],
   postStatus: null,
-  
+
 
   URL: "https://onlined-be.azurewebsites.net",
   // URL: "http://localhost:5000",
@@ -495,6 +495,69 @@ export const GlobalProvider = ({ children }) => {
     }
   }
 
+  async function deleteQuestion(studentId, authorId, _id, classRoomId) {
+    console.log("Deleting question");
+
+    try {
+      const question = {
+        studentId,
+        authorId,
+        _id,
+      };
+      console.log(question);
+      // console.log(`${state.URL}/api/v1/account/${state.person._id}`)
+      const res = await axios.delete(
+        `${state.URL}/api/v1/discussion/classroom/${classRoomId}`,
+        { data: { question } }
+      );
+
+      dispatch({
+        type: "DeleteQuestion_Success",
+      });
+    } catch (err) {
+      dispatch({
+        type: "DeleteQuestion_ERROR",
+        payload: err.response,
+      });
+    }
+    // studentId, authorId, _id
+  }
+
+  async function deleteAnswer(
+    studentId,
+    authorId,
+    _id,
+    questionId,
+    classRoomId
+  ) {
+    console.log("Deleting answer");
+
+    try {
+      const answer = {
+        studentId,
+        authorId,
+        _id,
+      };
+      console.log(answer);
+      // console.log(`${state.URL}/api/v1/account/${state.person._id}`)
+      const res = await axios.delete(
+        `${state.URL}/api/v1/discussion/classroom/${classRoomId}/question/${questionId}`,
+        { data: { answer } }
+      );
+
+      dispatch({
+        type: "DeleteQuestion_Success",
+      });
+    } catch (err) {
+      dispatch({
+        type: "DeleteQuestion_ERROR",
+        payload: err.response,
+      });
+    }
+
+    // /classroom/:classRoomId/question/:questionId
+  }
+
   return (
     <GlobalContext.Provider
       value={{
@@ -533,7 +596,9 @@ export const GlobalProvider = ({ children }) => {
         getSolutionsOfAssignment,
         assignMarks,
         addAnswer,
-        postStatus: state.postStatus
+        postStatus: state.postStatus,
+        deleteAnswer,
+        deleteQuestion,
       }}
     >
       {children}

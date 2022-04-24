@@ -166,6 +166,15 @@ const reducer = (state, action) => {
         classrooms: action.payload,
         loading: false,
       };
+    case "DeleteQuestion_ERROR":
+      return {
+        ...state,
+        error: action.payload,
+      };
+    case "DeleteQuestion_Success":
+      return {
+        ...state,
+      };
     default:
       return state;
   }

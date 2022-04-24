@@ -22,6 +22,9 @@ const UploadFile = () => {
     studentName : ""
 })
 
+
+const [status, setStatus] = useState("");
+
   console.log(solution);
 
   const fetchDetails = async () => {
@@ -121,10 +124,12 @@ const UploadFile = () => {
       console.log(key[0] + ", " + key[1]);
     }
     console.log(data);
+    setStatus('Posting...');
     axios
       .post(`${URL}/api/v1/solution`, data)
       .then((res) => {
         console.log(res.statusText);
+        setStatus('Completed')
       })
       .catch((e) => {
         console.error("Error", e);
@@ -154,7 +159,8 @@ const UploadFile = () => {
           }}
           type="submit"
         >
-          Upload Solution
+          {status === 'Posting...' ? (<>Posting...</>) : (<>Upload Solution</>)}
+          {status === 'Completed' ? (<>Posted Assignment Successfully</>) : (<></>)}
         </Button>
       </form>
       {solution && solution.link ? 
