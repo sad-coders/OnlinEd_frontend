@@ -25,10 +25,10 @@ import CardContent from "@mui/material/CardContent";
 // import { deleteSolution } from "../../../../OnlinEd/controller/solutionController";
 
 const UploadAssignment = () => {
-  const { classroomId } = useParams();
+  const { classroomId, URL } = useParams();
   console.log("new assignment  classroom id", classroomId);
 
-  const URL = "http://localhost:5000"; //"https://onlined-be.azurewebsites.net";
+  // const URL = "http://localhost:5000"; //"https://onlined-be.azurewebsites.net";
   const { assignment, person, token } = useContext(GlobalContext);
   const [file, setFile] = useState(null);
 
