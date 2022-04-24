@@ -149,7 +149,7 @@ export const GlobalProvider = ({ children }) => {
     const personId = state.person._id;
     try {
       const response = await axios.post(
-        `${URL}/api/v1/classroom/`,
+        `${state.URL}/api/v1/classroom/`,
         {
           className,
           personId,
