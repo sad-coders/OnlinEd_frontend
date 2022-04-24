@@ -72,7 +72,7 @@ const reducer = (state, action) => {
       return {
         ...state,
         loginError: action.payload,
-        message: "Login Failed! Try Again",
+        message: action.payload
       };
     case "SIGNUP_USER":
       return {

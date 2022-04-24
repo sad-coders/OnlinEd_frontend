@@ -306,10 +306,18 @@ export const GlobalProvider = ({ children }) => {
         password,
       });
 
-      dispatch({
-        type: "LOGIN_USER",
-        payload: res.data,
-      });
+      if(res.data && res.data.person && res.data.person.isVerified)
+      {
+        dispatch({
+          type: "LOGIN_USER",
+          payload: res.data,
+        });
+      }else{
+        dispatch({
+          type: "LOGIN_ERROR",
+          payload: 'Please verify your email before using website'
+        });
+      }
     } catch (err) {
       dispatch({
         type: "LOGIN_ERROR",
