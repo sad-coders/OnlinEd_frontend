@@ -35,8 +35,6 @@ const initialState = {
 
   URL: "https://onlined-be.azurewebsites.net",
   // URL: "http://localhost:5000",
-  // URL: 'https://onlined-be.azurewebsites.net',
-  // URL: "http://localhost:5000",
 };
 
 // const URL = 'http://localhost:5000';
@@ -149,7 +147,7 @@ export const GlobalProvider = ({ children }) => {
     const personId = state.person._id;
     try {
       const response = await axios.post(
-        `/api/v1/classroom/`,
+        `${URL}/api/v1/classroom/`,
         {
           className,
           personId,

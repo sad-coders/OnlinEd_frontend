@@ -38,19 +38,31 @@ const QuestionPage = () => {
   const { classRoomId } = useParams();
 
   const [content, setContent] = useState("");
-  const [title, setTitle] = useState("");
 
   const [visible, setVisible] = useState(false);
 
   const resetAnswer = () => {
     setContent("");
-    setTitle("");
+  };
+
+  // delete the question.
+
+  const deleteQuestion = (e) => {
+    e.preventDefault();
+
+    console.log("Deleting Question");
+  };
+
+  // delete the ans.
+
+  const deleteAnswer = (e) => {
+    e.preventDefault();
+    console.log("Delete Answer");
   };
 
   const submitHandler = (e) => {
     e.preventDefault();
     const Newanswer = {
-      title: title,
       content: content,
       type: "answer",
       parentId: question._id,
@@ -109,14 +121,14 @@ const QuestionPage = () => {
                 <Grid item md={12} xs={12} sm={12} style={{ marginLeft: 16 }}>
                   <Box sx={{ width: 1100, maxWidth: "100%" }}>
                     <Typography>Add a New Answer</Typography>
-                    <TextField
+                    {/* <TextField
                       required
                       fullWidth
                       label="Title"
                       id="fullWidth"
                       value={title}
                       onChange={(e) => setTitle(e.target.value)}
-                    />
+                    /> */}
                   </Box>
 
                   <Box
@@ -140,7 +152,7 @@ const QuestionPage = () => {
                 color="primary"
                 variant="contained"
                 type="submit"
-                disabled={title.length && content.length ? false : true}
+                disabled={content.length ? false : true}
               >
                 Answer
               </Button>
@@ -149,9 +161,7 @@ const QuestionPage = () => {
                 color="secondary"
                 variant="contained"
                 onClick={resetAnswer}
-                disabled={
-                  title.length === 0 && content.length === 0 ? true : false
-                }
+                disabled={content.length === 0 ? true : false}
               >
                 Reset
               </Button>
@@ -178,7 +188,11 @@ const QuestionPage = () => {
 
           <hr></hr>
           {question.authorId === person._id ? (
-            <Button variant="contained" color="secondary">
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={(e) => deleteQuestion(e)}
+            >
               Delete Question
             </Button>
           ) : (
@@ -197,9 +211,9 @@ const QuestionPage = () => {
               >
                 <CardContent>
                   <div>
-                    <Typography className={classes.heading} align="center">
+                    {/* <Typography className={classes.heading} align="center">
                       {answer.title}
-                    </Typography>
+                    </Typography> */}
                   </div>
 
                   <p>
@@ -209,7 +223,11 @@ const QuestionPage = () => {
                     </Typography>
                     <Typography align="right">
                       {answer.authorId === person._id ? (
-                        <Button variant="contained" color="secondary">
+                        <Button
+                          variant="contained"
+                          color="secondary"
+                          onClick={(e) => deleteAnswer(e)}
+                        >
                           Delete
                         </Button>
                       ) : (
