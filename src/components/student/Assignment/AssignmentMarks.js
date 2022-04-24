@@ -178,8 +178,7 @@ const AssignmentMarks = () => {
               <Divider />
               <List>
                 {solutionsOfAssignment.length > 0 &&
-                  solutionsOfAssignment.map((solution, index) => {
-                    if (solution.link) {
+                  solutionsOfAssignment.map((solution, index) => { 
                       return (
                         <ListItem
                           button
@@ -194,8 +193,7 @@ const AssignmentMarks = () => {
                           </ListItemIcon>
                           <ListItemText>{solution.studentName}</ListItemText>
                         </ListItem>
-                      );
-                    }
+                      ); 
                   })}
               </List>
               <Divider />

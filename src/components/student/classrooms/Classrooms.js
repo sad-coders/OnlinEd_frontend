@@ -5,9 +5,15 @@ import { Grid } from "@material-ui/core"
 import ClassroomCard from './ClassroomCard'
 import ClassroomCreation from "./ClassroomCreation"
 import ClassJoinCard from './ClassJoinCard'
-import Loader from "../../Loader"
+import Loader from "../../Loader";
+
+
+import Alert from '@mui/material/Alert';
+import Typography from '@mui/material/Typography';
+import AlertTitle from '@mui/material/AlertTitle';
+
 function Classrooms() {
-    const { classrooms, loading, getClassrooms, isFaculty } = useContext(GlobalContext)
+    const { classrooms, loading, getClassrooms, isFaculty, message } = useContext(GlobalContext)
     useEffect(() => {
         getClassrooms()
     }, [])
@@ -41,6 +47,14 @@ function Classrooms() {
                             <Grid>
                                 <ClassJoinCard />
                             </Grid>)
+                    }
+
+                    {
+                        message ? (
+                            <Typography severity="succes">
+                                <p>Classroom created Successfully</p>
+                                Please ReLogin to continue
+                            </Typography>) : (<></>)
                     }
                 </Grid>
             </>

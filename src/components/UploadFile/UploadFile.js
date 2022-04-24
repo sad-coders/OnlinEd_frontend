@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { GlobalContext } from "../../context/GlobalState";
 import { Buffer } from "buffer";
 import axios from "axios";
@@ -11,6 +11,38 @@ const UploadFile = () => {
   // const URL = "http://localhost:5000"; //"https://onlined-be.azurewebsites.net";
   const { assignment, person, token, URL } = useContext(GlobalContext);
   const [file, setFile] = useState(null);
+  const [solution, setSolution] = useState({ 
+    _id: null,
+    studentId : "",
+    assignmentId : "",
+    link : "",
+    dateOfSubmission : "",
+    deadline : "",
+    marks : null,
+    studentName : ""
+})
+
+  console.log(solution);
+
+  const fetchDetails = async () => {
+    // preventDefault();
+    const assignmentId = assignment._id;
+    const studentId = person._id;
+    const URL1 = `${URL}/api/v1/solution/getSolutionDetails/${assignmentId}/${studentId}`;
+
+    var res = await axios.get(URL1, {
+                headers: {
+                "content-type": "application/json",
+                Authorization: token,
+                }, 
+            })
+      console.log(res);
+      setSolution(res.data.solution)
+  };
+  
+  useEffect(() => {
+    fetchDetails()       
+  }, [])
 
   const onInputChange = (e) => {
     console.log(e.target.files[0]);
@@ -125,34 +157,39 @@ const UploadFile = () => {
           Upload Solution
         </Button>
       </form>
-      <Box display="flex" justifyContents="space-around">
-        <Button
-          variant="contained"
-          style={{
-            backgroundColor: "red",
-            color: "white",
-            margin: "10px",
-          }}
-          onClick={onDeleteSoltuion}
-          type="submit"
-        >
-          Delete Solution
-        </Button>
+      {solution.link ? 
+        (<>
+          Submitted on: {solution.dateOfSubmission}
+          <Box display="flex" justifyContents="space-around">   
+         
+            <Button
+            variant="contained"
+            style={{
+              backgroundColor: "red",
+              color: "white",
+              margin: "10px",
+            }}
+            onClick={onDeleteSoltuion}
+            type="submit"
+          >
+            Delete Solution
+          </Button>
 
-        <Button
-          variant="contained"
-          color="primary"
-          //display = "block"
-          style={{
-            margin: "10px",
-          }}
-          onClick={onDownloadSoltuion}
-          type="submit"
-        >
-          Download Solution
-        </Button>
-      </Box>
-
+          <Button
+            variant="contained"
+            color="primary"
+            //display = "block"
+            style={{
+              margin: "10px",
+            }}
+            onClick={onDownloadSoltuion}
+            type="submit"
+          >
+            Download Your Submission
+          </Button>
+        
+        </Box>
+      </>) : (<>You have not yet submitted the Assignment</>)}
       {/* <href
             download={"solution.pdf"}
             // style={{ visibility: "hidden" }}

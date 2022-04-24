@@ -33,6 +33,8 @@ function AssignmentStream() {
           <AssignmentStreamHeader
             className={classroom.className}
           ></AssignmentStreamHeader>
+          
+          {isFaculty ? <p>Class code to Join is : {classroom.classcode}</p> : <></>}
           {isFaculty ? <UploadAssignment /> : <></>}
 
           <Assignments assignments={classroom.assignments}></Assignments>

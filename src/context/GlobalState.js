@@ -33,8 +33,8 @@ const initialState = {
   message: null,
   solutionsOfAssignment: [],
 
-  URL: "http://localhost:5000",
-  // 'https://onlined-be.azurewebsites.net'
+  URL: 'https://onlined-be.azurewebsites.net',
+  // "http://localhost:5000",
 };
 
 // const URL = 'http://localhost:5000';
@@ -151,6 +151,7 @@ export const GlobalProvider = ({ children }) => {
         {
           className,
           personId,
+          name: state.person.name
         },
         {
           headers: {
@@ -160,7 +161,9 @@ export const GlobalProvider = ({ children }) => {
         }
       );
       if (response.status === 201) {
-        window.location.reload();
+        dispatch({
+          type: 'CLASSROOM_CREATE_SUCCESS'
+        })
       }
     } catch (error) {
       dispatch({
@@ -343,7 +346,7 @@ export const GlobalProvider = ({ children }) => {
         {
           email: state.person.email,
           name: state.person.name,
-          classcode: Number(classcode),
+          classcode: classcode,
         },
         {
           headers: {

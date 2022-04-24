@@ -7,6 +7,7 @@ import Loader from "../../Loader";
 import AssignmentSubmission from "./AssignmentSubmission";
 import { Grid } from "@material-ui/core";
 import { useLocation, useParams } from "react-router-dom";
+
 const Assignment = () => {
   const location = useLocation();
   console.log("assignment loc", location);

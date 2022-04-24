@@ -9,7 +9,7 @@ export default function Assignments({ assignments }) {
   console.log("Assignments.js assignments", assignments);
   return (
     <List sx={{ maxWidth: 555, bgcolor: "background.paper" }}>
-      {assignments.map((assignment, idx) => {
+      {assignments && assignments.length > 0 ? assignments.map((assignment, idx) => {
         console.log(assignment.assignmentId);
         return (
           <Link
@@ -34,7 +34,8 @@ export default function Assignments({ assignments }) {
             </ListItemButton>
           </Link>
         );
-      })}
+      }) : (<> No Assignments Posted Yet!</>)
+      }
     </List>
   );
 }

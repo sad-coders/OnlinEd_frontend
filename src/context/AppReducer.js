@@ -146,6 +146,12 @@ const reducer = (state, action) => {
           ...state,
           solutionsOfAssignment: action.payload
         }
+      case 'CLASSROOM_CREATE_SUCCESS':
+        return {
+          ...state,
+          message: 'Classroom created. ReLogin to proceed!',
+          loading: false
+        }
     default:
       return state;
   }
