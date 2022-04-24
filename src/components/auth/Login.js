@@ -15,8 +15,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
-import Alert from '@mui/material/Alert';
-import AlertTitle from '@mui/material/AlertTitle';
+import Alert from '@mui/material/Alert'; 
 
 import { GlobalContext } from "../../context/GlobalState";
 import { useNavigate } from 'react-router-dom';
@@ -132,15 +131,14 @@ const Login = () => {
                 </form>
                 {
                     message &&  signupSuccess ? (
-                        <Alert severity="succes">
-                            <AlertTitle>SignUp Success</AlertTitle>
+                        <Alert severity="success"  variant="outlined"  >
+                            SignUp Successful
                             Please Login to continue
                         </Alert>
                     ):(<></>)
                 }
-                {message ? (
-                        <Alert severity="error">
-                            <AlertTitle>Error</AlertTitle>
+                {message && !signupSuccess? (
+                        <Alert severity="error"> 
                             Login failed please try again!
                         </Alert>) : (<></>)
                 }
