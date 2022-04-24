@@ -35,6 +35,8 @@ const initialState = {
 
   URL: "https://onlined-be.azurewebsites.net",
   // URL: "http://localhost:5000",
+  // URL: 'https://onlined-be.azurewebsites.net',
+  // URL: "http://localhost:5000",
 };
 
 // const URL = 'http://localhost:5000';
@@ -144,10 +146,10 @@ export const GlobalProvider = ({ children }) => {
     dispatch({
       type: "CLASSROOM_POST_RQST",
     });
-    const personId = "626126cdd3990228bb87b725";
+    const personId = state.person._id;
     try {
       const response = await axios.post(
-        "/api/v1/classroom/",
+        `/api/v1/classroom/`,
         {
           className,
           personId,
@@ -160,9 +162,13 @@ export const GlobalProvider = ({ children }) => {
           },
         }
       );
+      console.log(response);
+      var newclassrooms = state.classrooms;
+      // newclassrooms
       if (response.status === 201) {
         dispatch({
           type: "CLASSROOM_CREATE_SUCCESS",
+          payload: response.data.updatedPerson.classrooms,
         });
       }
     } catch (error) {

@@ -163,7 +163,7 @@ const reducer = (state, action) => {
     case "CLASSROOM_CREATE_SUCCESS":
       return {
         ...state,
-        message: "Classroom created. ReLogin to proceed!",
+        classrooms: action.payload,
         loading: false,
       };
     default:
