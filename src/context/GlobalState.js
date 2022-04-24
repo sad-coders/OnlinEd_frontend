@@ -32,6 +32,8 @@ const initialState = {
   allAnswerOfQuestion: [],
   message: null,
   solutionsOfAssignment: [],
+  postStatus: null,
+  
 
   URL: "https://onlined-be.azurewebsites.net",
   // URL: "http://localhost:5000",
@@ -531,6 +533,7 @@ export const GlobalProvider = ({ children }) => {
         getSolutionsOfAssignment,
         assignMarks,
         addAnswer,
+        postStatus: state.postStatus
       }}
     >
       {children}

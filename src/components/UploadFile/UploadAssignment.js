@@ -68,6 +68,7 @@ const UploadAssignment = () => {
   };
 
   const [content, setContent] = useState("");
+  const [status, setStatus] = useState("");
   const [assignmentTitle, setassignmentTitle] = useState("");
   const [dueDate, setdueDate] = useState("");
 
@@ -103,10 +104,12 @@ const UploadAssignment = () => {
       console.log(key[0] + ", " + key[1]);
     }
     console.log(data);
+    setStatus('Posting...');
     axios
       .post(`${URL}/api/v1/assignment`, data)
       .then((res) => {
         console.log(res.statusText);
+        setStatus('Completed')
       })
       .catch((e) => {
         console.error("Error", e);
@@ -206,7 +209,8 @@ const UploadAssignment = () => {
           }}
           type="submit"
         >
-          Upload Assignment
+          {status === 'Posting...' ? (<>Posting...</>) : (<>Upload Assignment</>)}
+          {status === 'Completed' ? (<>Posted Assignment Successfully</>) : (<></>)}
         </Button>
       </form>
       <Box display="flex" justifyContents="space-around">
