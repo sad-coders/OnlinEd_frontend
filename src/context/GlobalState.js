@@ -6,16 +6,16 @@ import axios from "axios";
 const initialState = {
   classrooms: [],
   classroom: {
-    assignments : []
+    assignments: [],
   },
   error: null,
   assignment: {
-    authorName: '',
+    authorName: "",
     dueDate: null,
     postedOn: null,
-    assignmentTitle: '',
-    content: '',
-    link:''
+    assignmentTitle: "",
+    content: "",
+    link: "",
   },
   loading: false,
   name: "",
@@ -26,15 +26,18 @@ const initialState = {
   email: "tss11@iitbbs.ac.in",
   signupSuccess: false,
   person: {},
-  token:null,
+  token: null,
   userId: "004",
   allQuestionOfClassRoom: [],
   allAnswerOfQuestion: [],
   message: null,
   solutionsOfAssignment: [],
+
+  URL: "http://localhost:5000",
+  // 'https://onlined-be.azurewebsites.net'
 };
 
-const URL = 'http://localhost:5000';
+// const URL = 'http://localhost:5000';
 // 'https://onlined-be.azurewebsites.net'
 //Create Context
 export const GlobalContext = createContext(initialState);
@@ -54,8 +57,12 @@ export const GlobalProvider = ({ children }) => {
           type: "CLASSROOMS_RQST",
         });
         const res = await axios.get(
-          `${URL}/api/v1/classroom?email=${email}`,{
-            headers: { "Content-Type": "application/json" ,"Authorization" : `${state.token}`}
+          `${state.URL}/api/v1/classroom?email=${email}`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `${state.token}`,
+            },
           }
         );
         console.log("get classrooms", res.data);
@@ -73,17 +80,20 @@ export const GlobalProvider = ({ children }) => {
   }
 
   async function getAssignment(assignmentId) {
-    console.log("get assignment gc",assignmentId)
+    console.log("get assignment gc", assignmentId);
     // if(state.isLoggedIn){
     dispatch({
       type: "ASSIGNMENT_RQST",
     });
     try {
       const response = await axios.get(
-        `${URL}/api/v1/assignment/${assignmentId}`,{
-          headers: { "Content-Type": "application/json" ,"Authorization" : `${state.token}`}
+        `${state.URL}/api/v1/assignment/${assignmentId}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `${state.token}`,
+          },
         }
-        
       );
       console.log("get assignment", response.data);
       dispatch({
@@ -99,7 +109,7 @@ export const GlobalProvider = ({ children }) => {
     }
     // }
   }
-  
+
   async function getAssignmentsOfClassroom(classroomId) {
     const classroom_id = classroomId;
     // if(state.isLoggedIn){
@@ -108,8 +118,12 @@ export const GlobalProvider = ({ children }) => {
     });
     try {
       const response = await axios.get(
-        `${URL}/api/v1/classroom/${classroom_id}`,{
-          headers: { "Content-Type": "application/json" ,"Authorization" : `${state.token}`}
+        `${state.URL}/api/v1/classroom/${classroom_id}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `${state.token}`,
+          },
         }
       );
       console.log("get assignments", response.data);
@@ -132,12 +146,19 @@ export const GlobalProvider = ({ children }) => {
     });
     const personId = "626126cdd3990228bb87b725";
     try {
-      const response = await axios.post("/api/v1/classroom/", {
-        className,
-        personId,
-      },{
-        headers: { "Content-Type": "application/json" ,"Authorization" : `${state.token}`}
-      });
+      const response = await axios.post(
+        "/api/v1/classroom/",
+        {
+          className,
+          personId,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `${state.token}`,
+          },
+        }
+      );
       if (response.status === 201) {
         window.location.reload();
       }
@@ -197,9 +218,7 @@ export const GlobalProvider = ({ children }) => {
   async function verifyUser(userId) {
     console.log(" UserId sent for verification is " + userId);
     try {
-      const res = await axios.post(
-        `${URL}/api/v1/auth/verify/` + userId
-      );
+      const res = await axios.post(`${state.URL}/api/v1/auth/verify/` + userId);
 
       dispatch({
         type: "VERIFY_USER",
@@ -219,10 +238,13 @@ export const GlobalProvider = ({ children }) => {
         type: "Questions_RQST",
       });
       try {
-        const host = `${URL}`;
+        const host = `${state.URL}`;
         const URL = host + `/api/v1/discussion/classroom/${classRoomId}`;
-        const response = await axios.get(URL,{
-          headers: { "Content-Type": "application/json" ,"Authorization" : `${state.token}`}
+        const response = await axios.get(URL, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `${state.token}`,
+          },
         });
 
         dispatch({
@@ -245,13 +267,16 @@ export const GlobalProvider = ({ children }) => {
       type: "Answers_RQST",
     });
     try {
-      const host = `${URL}`;
+      const host = `${state.URL}`;
       const URL =
         host +
         `/api/v1/discussion/classroom/${classRoomId}/question/${questionId}`;
 
-      const response = await axios.get(URL,{
-        headers: { "Content-Type": "application/json" ,"Authorization" : `${state.token}`}
+      const response = await axios.get(URL, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `${state.token}`,
+        },
       });
 
       dispatch({
@@ -262,18 +287,15 @@ export const GlobalProvider = ({ children }) => {
       console.log("Get AllAnswers", error);
       dispatch({ type: "GET_RQST_ERROR" });
     }
-  }
+  };
 
   async function login(email, password) {
     console.log(" Login req sent for  " + email + " with pass " + password);
     try {
-      const res = await axios.post(
-        `${URL}/api/v1/auth/login/`,
-        {
-          email,
-          password,
-        }
-      );
+      const res = await axios.post(`${state.URL}/api/v1/auth/login/`, {
+        email,
+        password,
+      });
 
       dispatch({
         type: "LOGIN_USER",
@@ -291,16 +313,13 @@ export const GlobalProvider = ({ children }) => {
     var { email, password, isFaculty, name } = person;
     console.log(" SignUp req recvd");
     try {
-      const res = await axios.post(
-        `${URL}/api/v1/auth/signup/`,
-        {
-          email,
-          password,
-          isFaculty,
-          name,
-          profile_pic: "",
-        }
-      );
+      const res = await axios.post(`${state.URL}/api/v1/auth/signup/`, {
+        email,
+        password,
+        isFaculty,
+        name,
+        profile_pic: "",
+      });
       console.log(res);
       dispatch({
         type: "SIGNUP_USER",
@@ -318,16 +337,21 @@ export const GlobalProvider = ({ children }) => {
     // var {email, password, isFaculty, name} = person;
     console.log(" Join class req recvd");
     try {
-      // console.log(`${URL}/api/v1/account/${state.person._id}`)
+      // console.log(`${state.URL}/api/v1/account/${state.person._id}`)
       const res = await axios.put(
-        `${URL}/api/v1/account/${state.person._id}`,
+        `${state.URL}/api/v1/account/${state.person._id}`,
         {
           email: state.person.email,
           name: state.person.name,
           classcode: Number(classcode),
-        },{
-          headers: { "Content-Type": "application/json" ,"Authorization" : `${state.token}`}
-        });
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `${state.token}`,
+          },
+        }
+      );
       console.log(res);
       dispatch({
         type: "JOIN_CLASSROOM",
@@ -346,14 +370,17 @@ export const GlobalProvider = ({ children }) => {
       type: "Add_Question_RQST",
     });
     try {
-      const host = `${URL}`;
+      const host = `${state.URL}`;
       const URL = host + `/api/v1/discussion/classroom/${classRoomId}`;
       question.authorId = state.userId;
       console.log(question);
       console.log(URL);
 
-      const response = await axios.post(URL, question,{
-        headers: { "Content-Type": "application/json" ,"Authorization" : `${state.token}`}
+      const response = await axios.post(URL, question, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `${state.token}`,
+        },
       });
 
       console.log(response);
@@ -369,11 +396,13 @@ export const GlobalProvider = ({ children }) => {
   async function getSolutionsOfAssignment(assignmentId) {
     console.log(" get solns ");
     try {
-      // console.log(`${URL}/api/v1/account/${state.person._id}`)
-      const res = await axios.get(`${URL}/api/v1/solution/assignment/${assignmentId}`);
+      // console.log(`${state.URL}/api/v1/account/${state.person._id}`)
+      const res = await axios.get(
+        `${state.URL}/api/v1/solution/assignment/${assignmentId}`
+      );
       console.log(res);
-      var ans = []
-      if(res.data.solutions.length > 0) ans = res.data.solutions;
+      var ans = [];
+      if (res.data.solutions.length > 0) ans = res.data.solutions;
       dispatch({
         type: "GET_SOLUTIONS",
         payload: ans,
@@ -383,32 +412,29 @@ export const GlobalProvider = ({ children }) => {
         type: "GET_SOLUTIONS_ERROR",
         payload: err.response,
       });
-    } 
+    }
   }
 
   async function assignMarks(marks, solutionId) {
     console.log(" assign marks req recvd");
     try {
-      // console.log(`${URL}/api/v1/account/${state.person._id}`)
-      const res = await axios.put(
-        `${URL}/api/v1/solution`,
-        {
-          solution : {
-            _id: solutionId,
-            marks: Number(marks)
-          },
-        }
-      );
+      // console.log(`${state.URL}/api/v1/account/${state.person._id}`)
+      const res = await axios.put(`${state.URL}/api/v1/solution`, {
+        solution: {
+          _id: solutionId,
+          marks: Number(marks),
+        },
+      });
       console.log(res);
       var newArray = state.solutionsOfAssignment.map((sol) => {
-        if(sol._id === solutionId){
-          return res.data.updatedSolution
-        }else return sol
+        if (sol._id === solutionId) {
+          return res.data.updatedSolution;
+        } else return sol;
       });
-      console.log(newArray)
+      console.log(newArray);
       dispatch({
         type: "ASSIGN_MARKS",
-        payload: newArray
+        payload: newArray,
       });
     } catch (err) {
       dispatch({
@@ -435,9 +461,10 @@ export const GlobalProvider = ({ children }) => {
         allQuestionOfClassRoom: state.allQuestionOfClassRoom,
         person: state.person,
         signupSuccess: state.signupSuccess,
-        token:state.token,
+        token: state.token,
         solutionsOfAssignment: state.solutionsOfAssignment,
         message: state.message,
+        URL: state.URL,
         getClassrooms,
         // userLogin,
         getAssignment,
@@ -453,10 +480,10 @@ export const GlobalProvider = ({ children }) => {
         getAssignmentsOfClassroom,
         joinClassroom,
         getSolutionsOfAssignment,
-        assignMarks
+        assignMarks,
       }}
     >
       {children}
     </GlobalContext.Provider>
   );
-}
+};

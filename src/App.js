@@ -1,6 +1,6 @@
 // import logo from './logo.svg';
 import "./App.css";
-import ProtectedRoute from './components/ProtectedRoute'
+import ProtectedRoute from "./components/ProtectedRoute";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./components/Home";
 import UploadFile from "./components/UploadFile/UploadFile.js";
@@ -26,8 +26,8 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route element={<ProtectedRoute />}>
-            <Route path="/classrooms" element={ <Classrooms /> } />
-            
+            <Route path="/classrooms" element={<Classrooms />} />
+
             <Route path="/faculty" element={<Classrooms />} />
             <Route path="/upload" element={<UploadFile />} />
 
@@ -39,13 +39,18 @@ function App() {
               path="/classroom/:classRoomId/discussion/question"
               element={<QuestionPage />}
             />
-            <Route path="/classroom/:classroomId" element={<AssignmentStream/>}/>
-            <Route path="/assignment/:assignmentId" element={<Assignment/>}/>
+            <Route
+              path="/classroom/:classroomId"
+              element={<AssignmentStream />}
+            />
+            <Route path="/assignment/:assignmentId" element={<Assignment />} />
           </Route>
           <Route path="/student" element={<Classrooms />} />
-          <Route path="/assignmentmarks/:assignmentId" element={<AssignmentMarks />} />
+          <Route
+            path="/assignmentmarks/:assignmentId"
+            element={<AssignmentMarks />}
+          />
           <Route path="/classrooms" element={<Classrooms />} />
-          
 
           <Route path="/signup" element={<SignUp />} />
           <Route path="/verify/:userId" element={<Verify />} />

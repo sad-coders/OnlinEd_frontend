@@ -1,5 +1,5 @@
-import React, { useState , useContext} from "react";
-import { GlobalContext } from "../../context/GlobalState"
+import React, { useState, useContext } from "react";
+import { GlobalContext } from "../../context/GlobalState";
 import { Buffer } from "buffer";
 import axios from "axios";
 import "./UploadFile.css";
@@ -8,8 +8,8 @@ import Button from "@material-ui/core/Button";
 // import { deleteSolution } from "../../../../OnlinEd/controller/solutionController";
 
 const UploadFile = () => {
-  const URL = "http://localhost:5000" //"https://onlined-be.azurewebsites.net";
-  const { assignment, person , token } = useContext(GlobalContext)
+  // const URL = "http://localhost:5000"; //"https://onlined-be.azurewebsites.net";
+  const { assignment, person, token, URL } = useContext(GlobalContext);
   const [file, setFile] = useState(null);
 
   const onInputChange = (e) => {
@@ -27,7 +27,8 @@ const UploadFile = () => {
     axios
       .delete(URL1, {
         headers: {
-          "content-type": "application/json", "Authorization" : token
+          "content-type": "application/json",
+          Authorization: token,
         },
         data: { AssignmentId: AssignmentId, StudentId: StudentId },
       })
@@ -77,20 +78,17 @@ const UploadFile = () => {
       studentId: person._id,
       assignmentId: assignment._id,
       studentName: person.name,
-      link: "",
-      date: "2022-09-27",
-      deadline: "2022-11-29",
     };
 
     data.append("file", file);
-    console.log(data)
+    // console.log(data)
     console.log(solution);
-    console.log(assignment)
+    // console.log(assignment)
     data.append("solution", JSON.stringify(solution));
     for (var key of data.entries()) {
-      console.log(key[0] + ', ' + key[1]);
-  }
-    console.log(data)
+      console.log(key[0] + ", " + key[1]);
+    }
+    console.log(data);
     axios
       .post(`${URL}/api/v1/solution`, data)
       .then((res) => {
@@ -118,24 +116,22 @@ const UploadFile = () => {
         <Button
           variant="contained"
           style={{
-            backgroundColor: 'green',
-            color: 'white',
-            margin : '10px'
+            backgroundColor: "green",
+            color: "white",
+            margin: "10px",
           }}
-          type="submit">
+          type="submit"
+        >
           Upload Solution
         </Button>
       </form>
-      <Box
-      display = "flex"
-      justifyContents = "space-around"
-      >
+      <Box display="flex" justifyContents="space-around">
         <Button
           variant="contained"
           style={{
-            backgroundColor: 'red',
-            color: 'white',
-            margin : '10px'
+            backgroundColor: "red",
+            color: "white",
+            margin: "10px",
           }}
           onClick={onDeleteSoltuion}
           type="submit"
@@ -148,7 +144,7 @@ const UploadFile = () => {
           color="primary"
           //display = "block"
           style={{
-            margin : '10px'
+            margin: "10px",
           }}
           onClick={onDownloadSoltuion}
           type="submit"
@@ -156,8 +152,6 @@ const UploadFile = () => {
           Download Solution
         </Button>
       </Box>
-
-
 
       {/* <href
             download={"solution.pdf"}
