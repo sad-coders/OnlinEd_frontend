@@ -25,6 +25,8 @@ const QuestionPage = () => {
     addAnswer,
     URL,
     person,
+    deleteQuestion,
+    deleteAnswer,
   } = useContext(GlobalContext);
 
   const location = useLocation();
@@ -47,17 +49,40 @@ const QuestionPage = () => {
 
   // delete the question.
 
-  const deleteQuestion = (e) => {
+  const deleteQuestionPage = async (e) => {
     e.preventDefault();
 
+    //deleting question.
+    //alert.
+
     console.log("Deleting Question");
+
+    // studentId, authorId, _id
+    await deleteQuestion(
+      person._id,
+      question.authorId,
+      question._id,
+      classRoomId
+    );
+
+    console.log("Deleted completed");
+    // alert done
   };
 
   // delete the ans.
 
-  const deleteAnswer = (e) => {
+  const deleteAnswerPage = (e, answer) => {
     e.preventDefault();
-    console.log("Delete Answer");
+    console.log("Deleting Answer started");
+    deleteAnswer(
+      person._id,
+      question.authorId,
+      answer._id,
+      question._id,
+      classRoomId
+    );
+
+    console.log("Deleting Answer Completed");
   };
 
   const submitHandler = (e) => {
@@ -191,7 +216,7 @@ const QuestionPage = () => {
             <Button
               variant="contained"
               color="secondary"
-              onClick={(e) => deleteQuestion(e)}
+              onClick={(e) => deleteQuestionPage(e)}
             >
               Delete Question
             </Button>
@@ -226,7 +251,7 @@ const QuestionPage = () => {
                         <Button
                           variant="contained"
                           color="secondary"
-                          onClick={(e) => deleteAnswer(e)}
+                          onClick={(e) => deleteAnswerPage(e, answer)}
                         >
                           Delete
                         </Button>
