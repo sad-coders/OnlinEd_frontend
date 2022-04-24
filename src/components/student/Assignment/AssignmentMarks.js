@@ -82,7 +82,7 @@ const AssignmentMarks = () => {
   };
 
   useEffect(() => {
-    if (solutionsOfAssignment && solutionsOfAssignment.length > 0) {
+    if (solution._id && solutionsOfAssignment && solutionsOfAssignment.length > 0) {
       var solutions = solutionsOfAssignment.filter(
         (sol) => sol._id === solution._id
       );
