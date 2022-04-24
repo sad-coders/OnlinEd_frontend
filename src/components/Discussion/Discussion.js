@@ -24,6 +24,8 @@ const Discussion = () => {
     getAllQuestionOfClassRoom,
     loading,
     addQuestion,
+    URL,
+    person,
   } = useContext(GlobalContext);
 
   const { classRoomId } = useParams();
@@ -43,7 +45,7 @@ const Discussion = () => {
     setTitle("");
   };
   const submitHandler = (e) => {
-    // e.preventDefault();
+    e.preventDefault();
     const Newquestion = {
       title: title,
       content: content,
@@ -51,10 +53,12 @@ const Discussion = () => {
       parentId: "",
       date: new Date().toISOString().slice(0, 10),
       classroomId: classRoomId,
+      authorName: person.name,
     };
     // call the function from the GlobalState
     addQuestion(classRoomId, Newquestion);
     resetQuestion();
+    // window.location.href = `/classroom/${classRoomId}/`;
   };
 
   const useStyles = makeStyles((theme) => ({
@@ -175,11 +179,20 @@ const Discussion = () => {
                 <Typography className={classes.heading} align="center">
                   {question.title}
                 </Typography>
-                <Typography className={classes.secondaryHeading}>
+                <p>
+                  Asked By:
+                  <Typography className={classes.secondaryHeading}>
+                    {question.authorName}
+                  </Typography>
+                </p>
+                <hr></hr>
+
+                <p>
+                  {" "}
                   {question.content.length < 100
                     ? question.content.slice(0, 100)
                     : question.content.slice(0, 100) + "..."}
-                </Typography>
+                </p>
               </CardContent>
             </Card>
           </Link>

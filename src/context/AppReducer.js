@@ -49,7 +49,7 @@ const reducer = (state, action) => {
         ...state,
         loading: true,
         classroom: {
-          assignments : []
+          assignments: [],
         },
       };
     case "ASSIGNMENTS_RQST_SUCCESS":
@@ -65,20 +65,20 @@ const reducer = (state, action) => {
         token: action.payload.token,
         person: action.payload.person,
         email: action.payload.person.email,
-        name : action.payload.person.name,
-        isFaculty : !action.payload.person.isStudent
-      }
-    case 'LOGIN_ERROR' : 
+        name: action.payload.person.name,
+        isFaculty: !action.payload.person.isStudent,
+      };
+    case "LOGIN_ERROR":
       return {
         ...state,
         loginError: action.payload,
-        message: 'Login Failed! Try Again'
+        message: "Login Failed! Try Again",
       };
     case "SIGNUP_USER":
       return {
         ...state,
         signupSuccess: action.payload.auth,
-        message:'SignUp sucessful. Login to continue'
+        message: "SignUp sucessful. Login to continue",
       };
     case "JOIN_CLASSROOM":
       return {
@@ -110,8 +110,22 @@ const reducer = (state, action) => {
     case "Add_Question_RQST":
       return { ...state, loading: true };
 
+    case "Add_Answer_RQST":
+      return { ...state, loading: true };
+
     case "AddingNewQuestion_RQST_SUCCESS":
-      return { ...state, loading: false };
+      return {
+        ...state,
+        allQuestionOfClassRoom: action.payload,
+        loading: false,
+      };
+
+    case "AddingNewAnswer_RQST_SUCCESS":
+      return {
+        ...state,
+        allAnswerOfQuestion: action.payload,
+        loading: false,
+      };
 
     case "ALLQUESTION_RQST_SUCCESS":
       return {
@@ -130,28 +144,28 @@ const reducer = (state, action) => {
        loading : true,
      }
      */
-    case 'GET_SOLUTIONS':
+    case "GET_SOLUTIONS":
       return {
         ...state,
         solutionsOfAssignment: action.payload,
         // loading: false
-      }
-      case 'GET_SOLUTIONS_ERROR':
-        return {
-          ...state,
-          error: action.payload
-        }
-      case 'ASSIGN_MARKS':
-        return {
-          ...state,
-          solutionsOfAssignment: action.payload
-        }
-      case 'CLASSROOM_CREATE_SUCCESS':
-        return {
-          ...state,
-          message: 'Classroom created. ReLogin to proceed!',
-          loading: false
-        }
+      };
+    case "GET_SOLUTIONS_ERROR":
+      return {
+        ...state,
+        error: action.payload,
+      };
+    case "ASSIGN_MARKS":
+      return {
+        ...state,
+        solutionsOfAssignment: action.payload,
+      };
+    case "CLASSROOM_CREATE_SUCCESS":
+      return {
+        ...state,
+        message: "Classroom created. ReLogin to proceed!",
+        loading: false,
+      };
     default:
       return state;
   }

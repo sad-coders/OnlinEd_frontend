@@ -19,11 +19,15 @@ import Login from "./components/auth/Login";
 import Loader from "./components/Loader";
 import SignUp from "./components/auth/SignUp";
 import ClassroomCreation from "./components/student/classrooms/ClassroomCreation";
+import Header from "./components/HeaderFooter/Header";
+import Footer from "./components/HeaderFooter/Footer";
+// import Footer from "./components/HeaderFooter/Footer";
 
 function App() {
   return (
     <GlobalProvider>
       <BrowserRouter>
+        <Header />
         <Routes>
           <Route element={<ProtectedRoute />}>
             <Route path="/classrooms" element={<Classrooms />} />
@@ -56,6 +60,7 @@ function App() {
           <Route path="/verify/:userId" element={<Verify />} />
           <Route path="/" element={<Login />} />
         </Routes>
+        <Footer />
       </BrowserRouter>
     </GlobalProvider>
   );

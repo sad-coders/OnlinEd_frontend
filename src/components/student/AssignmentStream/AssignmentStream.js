@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { GlobalContext } from "../../../context/GlobalState";
 import Assignments from "./Assignments";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import AssignmentStreamHeader from "./AssignmentStreamHeader";
 import { Grid } from "@mui/material";
 import Loader from "../../Loader";
@@ -30,11 +30,17 @@ function AssignmentStream() {
     >
       <Grid item xs={3}>
         <>
-          <AssignmentStreamHeader
-            className={classroom.className}
-          ></AssignmentStreamHeader>
-          
-          {isFaculty ? <p>Class code to Join is : {classroom.classcode}</p> : <></>}
+          <Link to={`/classroom/${classroomId}/discussion/`}>
+            <AssignmentStreamHeader
+              className={classroom.className}
+            ></AssignmentStreamHeader>
+          </Link>
+
+          {isFaculty ? (
+            <p>Class code to Join is : {classroom.classcode}</p>
+          ) : (
+            <></>
+          )}
           {isFaculty ? <UploadAssignment /> : <></>}
 
           <Assignments assignments={classroom.assignments}></Assignments>

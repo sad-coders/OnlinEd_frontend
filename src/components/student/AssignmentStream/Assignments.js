@@ -9,33 +9,36 @@ export default function Assignments({ assignments }) {
   console.log("Assignments.js assignments", assignments);
   return (
     <List sx={{ maxWidth: 555, bgcolor: "background.paper" }}>
-      {assignments && assignments.length > 0 ? assignments.map((assignment, idx) => {
-        console.log(assignment.assignmentId);
-        return (
-          <Link
-            key={idx}
-            to={
-              isFaculty
-                ? `/assignmentmarks/${assignment.assignmentId}`
-                : `/assignment/${assignment.assignmentId}`
-            }
-            style={{ textDecoration: "none", color: "inherit" }}
-          >
-            <ListItemButton divider>
-              <ListItemIcon>
-                <AssignmentIcon />
-              </ListItemIcon>
-              <ListItem>
-                <ListItemText
-                  primary={assignment.assignmentTitle}
-                  secondary={assignment.postedOn}
-                />
-              </ListItem>
-            </ListItemButton>
-          </Link>
-        );
-      }) : (<> No Assignments Posted Yet!</>)
-      }
+      {assignments && assignments.length > 0 ? (
+        assignments.map((assignment, idx) => {
+          console.log(assignment.assignmentId);
+          return (
+            <Link
+              key={idx}
+              to={
+                isFaculty
+                  ? `/assignmentmarks/${assignment.assignmentId}`
+                  : `/assignment/${assignment.assignmentId}`
+              }
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
+              <ListItemButton divider>
+                <ListItemIcon>
+                  <AssignmentIcon />
+                </ListItemIcon>
+                <ListItem>
+                  <ListItemText
+                    primary={assignment.assignmentTitle}
+                    secondary={assignment.postedOn}
+                  />
+                </ListItem>
+              </ListItemButton>
+            </Link>
+          );
+        })
+      ) : (
+        <> No Assignments Posted Yet!</>
+      )}
     </List>
   );
 }

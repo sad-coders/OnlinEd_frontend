@@ -33,8 +33,8 @@ const initialState = {
   message: null,
   solutionsOfAssignment: [],
 
-  URL: 'https://onlined-be.azurewebsites.net',
-  // "http://localhost:5000",
+  URL: "https://onlined-be.azurewebsites.net",
+  // URL: "http://localhost:5000",
 };
 
 // const URL = 'http://localhost:5000';
@@ -151,7 +151,7 @@ export const GlobalProvider = ({ children }) => {
         {
           className,
           personId,
-          name: state.person.name
+          name: state.person.name,
         },
         {
           headers: {
@@ -162,8 +162,8 @@ export const GlobalProvider = ({ children }) => {
       );
       if (response.status === 201) {
         dispatch({
-          type: 'CLASSROOM_CREATE_SUCCESS'
-        })
+          type: "CLASSROOM_CREATE_SUCCESS",
+        });
       }
     } catch (error) {
       dispatch({
@@ -375,7 +375,7 @@ export const GlobalProvider = ({ children }) => {
     try {
       const host = `${state.URL}`;
       const URL = host + `/api/v1/discussion/classroom/${classRoomId}`;
-      question.authorId = state.userId;
+      question.authorId = state.person._id;
       console.log(question);
       console.log(URL);
 
@@ -386,12 +386,54 @@ export const GlobalProvider = ({ children }) => {
         },
       });
 
-      console.log(response);
+      // var oldobj = state.allQuestionOfClassRoom
+      // oldobj.push(question)
+      // console.log(response.data.insertQuestion.insertedId);
+      question._id = response.data.insertQuestion.insertedId;
+      var newArray = state.allQuestionOfClassRoom;
+      newArray.push(question);
       dispatch({
         type: "AddingNewQuestion_RQST_SUCCESS",
+        payload: newArray,
       });
     } catch (error) {
       console.log("Adding new Question failed", error);
+      dispatch({ type: "GET_RQST_ERROR" });
+    }
+  };
+
+  const addAnswer = async (questionId, classRoomId, answer) => {
+    dispatch({
+      type: "Add_Answer_RQST",
+    });
+    try {
+      const host = `${state.URL}`;
+      const URL =
+        host +
+        `/api/v1/discussion/classroom/${classRoomId}/question/${questionId}`;
+
+      answer.authorId = state.person._id;
+      console.log(answer);
+      console.log(URL);
+
+      const response = await axios.post(URL, answer, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `${state.token}`,
+        },
+      });
+
+      console.log(response);
+
+      answer._id = response.data.insertAnswer.insertedId;
+      var newArray = state.allAnswerOfQuestion;
+      newArray.push(answer);
+      dispatch({
+        type: "AddingNewAnswer_RQST_SUCCESS",
+        payload: newArray,
+      });
+    } catch (error) {
+      console.log("Adding new Answer failed", error);
       dispatch({ type: "GET_RQST_ERROR" });
     }
   };
@@ -484,6 +526,7 @@ export const GlobalProvider = ({ children }) => {
         joinClassroom,
         getSolutionsOfAssignment,
         assignMarks,
+        addAnswer,
       }}
     >
       {children}
