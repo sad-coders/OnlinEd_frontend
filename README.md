@@ -28,7 +28,7 @@ A wholesome website for better online mode of intraction between Teachers and St
 ## Screenshots
 
 ### Login. 
-![App Screenshot](https://github.com/sad-coders/OnlinEd/PIC/4.jpeg)
+![App Screenshot](https://github.com/sad-coders/OnlinEd/tree/master/PIC/4.jpeg)
 
 ### Teacher View.
 
