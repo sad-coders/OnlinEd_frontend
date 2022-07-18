@@ -1,70 +1,101 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# OnlineED 
+#### Virtual Classroom.
 
-## Available Scripts
 
-In the project directory, you can run:
+A wholesome website for better online mode of intraction between Teachers and Student.
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Technologies Used
 
-### `npm run build`
+- Frontend-  ReactJs
+- Backend- NodeJs
+- Database- cosmos db
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Azure Services Used
 
-### `npm run eject`
+- Docker
+- The application used Azure container registery for storing docker images.
+- "Azure App Service" for deployment.
+- We enabled CI/CD using GitHub actions.
+- Cosmosdb.
+- Blob storage.
+## Screenshots
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Login. 
+![App Screenshot](https://github.com/sad-coders/OnlinEd/PIC/4.jpeg)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Teacher View.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- Create New Classroom.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+ ![App Screenshot](https://github.com/sad-coders/OnlinEd/PIC/9.jpeg)
 
-## Learn More
+- Check Assignement submited by Students.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+ ![App Screenshot](https://github.com/sad-coders/OnlinEd/PIC/11.jpeg)
+ 
+ ![App Screenshot](https://github.com/sad-coders/OnlinEd/PIC/12.jpeg)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- Assignment Upload.
 
-### Analyzing the Bundle Size
+![App Screenshot]https://github.com/sad-coders/OnlinEd(/PIC/10.jpeg)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Student View.
 
-### Making a Progressive Web App
+- Join Classroom with help for Class Code provided by Teacher.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+![App Screenshot](https://github.com/sad-coders/OnlinEd/PIC/5.jpeg)
 
-### Advanced Configuration
+- Classrooms that Student has joined.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+![App Screenshot](https://github.com/sad-coders/OnlinEd/PIC/6.jpeg)
 
-### Deployment
+- Assignment View.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+![App Screenshot](https://github.com/sad-coders/OnlinEd/PIC/13.jpeg)
 
-### `npm run build` fails to minify
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Uploading the  Assignemnt 
+
+![App Screenshot](https://github.com/sad-coders/OnlinEd/PIC/7.jpeg)
+
+![App Screenshot](https://github.com/sad-coders/OnlinEd/PIC/8.jpeg)
+
+
+### Discussion Portal.
+- Portal for each class where student can discuss and answer each other.
+
+![App Screenshot](https://github.com/sad-coders/OnlinEd/PIC/14.jpeg)
+
+![App Screenshot](https://github.com/sad-coders/OnlinEd/PIC/1.jpeg)
+
+![App Screenshot](https://github.com/sad-coders/OnlinEd/PIC/2.jpeg)
+
+![App Screenshot](https://github.com/sad-coders/OnlinEd/PIC/3.jpeg)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
